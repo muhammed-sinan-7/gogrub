@@ -1,0 +1,69 @@
+
+.reg-form input{
+    height: 50px;
+    background-color: white;
+    margin-bottom: 1.3rem;
+    border-radius: 5px;
+    color: black;
+    padding-left: 0.5rem;
+    font-size: 15px;
+    width: 350px;
+}
+input::placeholder{
+    color: rgb(130, 128, 128);
+    font-family: 'inter';
+}
+.register-head{
+    font-family: 'poppins';
+    font-size: 40px;
+    font-weight: 600;
+}
+.reg-button{
+    font-family: 'poppins';
+    font-size: 25px;
+    background-color: rgb(255, 255, 255);
+    transition: all 0.5s ease;
+    color: orange;
+}
+.reg-button:hover{
+    border:1px solid white;
+    background-color: transparent;
+    color: white;
+}
+.mobile-reg{
+    background-color: white;
+    border-radius: 5px;
+    color: orangered;
+    transition: all 0.4s ease;
+}
+.mobile-reg:hover{
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+}
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.error {
+    font-family: 'Poppins', sans-serif;
+    color: rgb(91, 12, 12);
+    /* background-color: #f44336; red-ish background  */
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'inter';
+    font-weight: 600;
+    display: inline-block;
+    animation: popup 0.5s ease forwards;
+}
