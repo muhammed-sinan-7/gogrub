@@ -9,7 +9,9 @@ function Signup() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
     const [cpassword, setCpassword] = useState('');
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState({});
+    const [cart,setcart]= useState([])
+    const [wishlist,setWhishlist] = useState([])
 
     const navigate = useNavigate();
     const validate = () => {
@@ -53,7 +55,9 @@ function Signup() {
             name,
             email,
             password,
-            cpassword
+            cpassword,
+            cart,
+            wishlist
         }
 
         try {

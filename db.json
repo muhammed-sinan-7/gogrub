@@ -21,5 +21,304 @@
       "password": "ssssss",
       "cpassword": "ssssss"
     }
+  ],
+  "product": [
+    {
+      "id":"1",
+      "name": "Midnight Margherita",
+      "category": "Pizza",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "20 Minute",
+      "description": "A perfect blend of simplicity and flavor, this pizza features a golden, thin-crust base topped with rich tomato sauce, fresh mozzarella, and fragrant basil leaves. Baked to perfection, its melty cheese and aromatic herbs create a comforting, classic taste that’s perfect for late-night cravings.",
+      "prize": "₹379",
+      "img_url": "https://img.freepik.com/free-photo/close-up-delicious-pizza_23-2150852213.jpg"
+    },
+    {
+      "id":"2",
+      "name": "Smoky Bourbon BBQ Burger",
+      "category": "Burgers",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "Sink your teeth into a juicy, perfectly grilled beef patty glazed with a rich smoky bourbon BBQ sauce. Topped with melted cheddar, crispy onion rings, fresh lettuce, and ripe tomatoes, all sandwiched between a toasted brioche bun. Every bite delivers a smoky, tangy, and slightly sweet flavor explosion that’s irresistible for burger lovers.",
+      "prize": "₹459",
+      "img_url": "https://img.freepik.com/free-photo/fast-food-menu-with-energy-drink-cans_114579-2136.jpg"
+    },
+    {
+      "id":"3",
+      "name": "Golden Tiger Roll Sushi",
+      "category": "Sushi",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "18 Minute",
+      "description": "The Golden Tiger Roll is a decadent sushi roll filled with crispy shrimp tempura, creamy avocado, and often cream cheese, then topped with spicy crab, drizzled with spicy mayo and eel sauce, and finished with a crunchy, flavorful garnish.",
+      "prize": "₹279",
+      "img_url": "https://img.freepik.com/free-photo/grilled-eel-unagi-fish-sushi-maki-roll-with-sweet-sauce_74190-6296.jpg"
+    },
+    {
+      "id":"4",
+      "name": "Saffron Butter Prawns",
+      "category": "Seafood",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "23 Minute",
+      "description": "Succulent prawns gently sautéed in a rich saffron-infused butter sauce, finished with a touch of cream and aromatic spices",
+      "prize": "₹479",
+      "img_url": "https://img.freepik.com/free-photo/delicious-seafood-table_23-2150857704.jpg"
+    },
+    {
+      "id":"5",
+      "name": "Paneer Tikka Masala Deluxe",
+      "category": "Vegetarian",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "Char-grilled cubes of marinated paneer simmered in a luxurious, spiced tomato-cream gravy with peppers, onions, and aromatic herbs",
+      "prize": "₹239",
+      "img_url": "https://img.freepik.com/free-photo/healthy-homemade-meal-beef-curry-with-naan-generated-by-ai_188544-41071.jpg"
+    },
+    {
+      "id":"6",
+      "name": "Lemon Garlic Butter Salmon",
+      "category": "Seafood",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "20 Minute",
+      "description": "Fresh salmon fillet pan-seared and finished in a silky lemon-garlic butter sauce, accented with herbs for a bright, melt-in-the-mouth flavor.",
+      "prize": "₹339",
+      "img_url": "https://img.freepik.com/free-photo/tasty-mahi-mahi-fish-still-life_23-2150457350.jpg"
+    },
+    {
+      "id":"7",
+      "name": "Wild Mushroom Risotto",
+      "category": "Vegetarian",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "10 Minute",
+      "description": "Creamy Arborio rice slowly cooked with a medley of wild mushrooms, finished with Parmesan, fresh herbs and a drizzle of truffle oil.",
+      "prize": "₹259",
+      "img_url": "https://img.freepik.com/free-photo/edible-mushroom-risotto-with-parsley-parmesan-cheese-generated-by-ai_188544-38463.jpg"
+    },
+    {
+      "id":"8",
+      "name": "Herb-Cristed Chicken Supreme",
+      "category": "Poultry",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "17 Minute",
+      "description": "Tender chicken breast coated in a fragrant herb crust, oven-roasted to perfection and served with a light jus and seasonal accompaniments..",
+      "prize": "₹469",
+      "img_url": "https://img.freepik.com/free-photo/baked-zucchini-sticks-with-cheese-bread-crumbs_2829-10865.jpg"
+    },
+    {
+      "id":"9",
+      "name": "Pistachio Rose Delight",
+      "category": "Desserts",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "20 Minute",
+      "description": "A delicate fusion of creamy pistachio and fragrant rose, layered into a luscious dessert finished with nuts and a hint of sweetness.",
+      "prize": "₹349",
+      "img_url": "https://img.freepik.com/free-photo/side-view-pistachio-cookies-red-plate-black-background_176474-3878.jpg"
+    },
+    {
+      "id":"10",
+      "name": "Spicy Volcano Maki",
+      "category": "Rolls",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "A fiery sushi roll packed with spicy tuna and avocado, topped with a baked creamy seafood mix and drizzled with tangy volcano sauce for a bold, erupting flavor..",
+      "prize": "₹349",
+      "img_url": "https://img.freepik.com/free-photo/sushi-roll-set-desk-topped-with-sauce-top-view_141793-13082.jpg"
+    },
+    {
+      "id":"11",
+      "name": "Smoky Bourbon BBQ Burger",
+      "category": "Burgers",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "20 Minute",
+      "description": "Juicy beef patty glazed with smoky bourbon BBQ sauce, layered with caramelized onions, cheddar cheese, and crispy bacon in a brioche bun.",
+      "prize": "₹399",
+      "img_url": "https://img.freepik.com/free-photo/delicious-burger-with-bacon-cheese_140725-3158.jpg"
+    },
+    {
+      "id":"12",
+      "name": "Classic Cheese Burst Burger",
+      "category": "Burgers",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "A timeless favorite with double cheese slices, lettuce, tomatoes, and a perfectly grilled patty topped with creamy mayo.",
+      "prize": "₹299",
+      "img_url": "https://img.freepik.com/free-photo/front-view-tasty-meat-burger_23-2148663424.jpg"
+    },
+    {
+      "id":"13",
+      "name": "Spicy Jalapeño Crunch Burger",
+      "category": "Burgers",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "18 Minute",
+      "description": "Loaded with fiery jalapeños, pepper jack cheese, crispy nachos, and spicy chipotle mayo for a crunchy, bold kick.",
+      "prize": "₹349",
+      "img_url": "https://img.freepik.com/free-photo/hamburger-with-french-fries-wooden-board_123827-20075.jpg"
+    },
+    {
+      "id":"14",
+      "name": "Mushroom Swiss Burger",
+      "category": "Burgers",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "17 Minute",
+      "description": "Savory sautéed mushrooms paired with melted Swiss cheese and a tender beef patty, served in a soft sesame bun.",
+      "prize": "₹369",
+      "img_url": "https://img.freepik.com/free-photo/beef-burger-with-mushrooms-swiss-cheese_123827-20372.jpg"
+    },
+    {
+      "id":"15",
+      "name": "Crispy Veggie Delight Burger",
+      "category": "Burgers",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "Crispy veggie patty topped with fresh lettuce, tomatoes, cucumbers, and a tangy mint mayo sauce in a toasted bun.",
+      "prize": "₹259",
+      "img_url": "https://img.freepik.com/free-photo/vegetarian-burger-fresh-vegetables_140725-1001.jpg"
+    },
+    {
+      "id": "16",
+      "name": "Kung Pao Chicken",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "20 Minutes",
+      "description": "A classic Sichuan dish made with stir-fried chicken, peanuts, vegetables, and chili peppers in a tangy spicy sauce.",
+      "prize": "₹299",
+      "img_url": "https://img.freepik.com/free-photo/stir-fry-chicken-with-vegetables-plate_114579-33539.jpg"
+    },
+    {
+      "id": "17",
+      "name": "Sweet and Sour Pork",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "25 Minutes",
+      "description": "Crispy pork pieces tossed with pineapple, bell peppers, and onions in a sweet and tangy sauce.",
+      "prize": "₹329",
+      "img_url": "https://img.freepik.com/free-photo/sweet-sour-pork-white-plate_1339-173095.jpg"
+    },
+    {
+      "id": "18",
+      "name": "Chow Mein",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "15 Minutes",
+      "description": "Stir-fried noodles with vegetables, soy sauce, and your choice of chicken, beef, or shrimp.",
+      "prize": "₹249",
+      "img_url": "https://img.freepik.com/free-photo/fried-noodles-with-vegetables-chicken-plate_2829-20560.jpg"
+    },
+    {
+      "id": "19",
+      "name": "Mapo Tofu",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "18 Minutes",
+      "description": "A spicy Sichuan delicacy with soft tofu, minced pork, and chili bean paste in a bold sauce.",
+      "prize": "₹279",
+      "img_url": "https://img.freepik.com/free-photo/traditional-chinese-dish-mapotofu_1205-2462.jpg"
+    },
+    {
+      "id": "20",
+      "name": "Spring Rolls",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "12 Minutes",
+      "description": "Crispy rolls filled with vegetables and served with a sweet chili dipping sauce.",
+      "prize": "₹199",
+      "img_url": "https://img.freepik.com/free-photo/close-up-fried-spring-rolls_140725-8130.jpg"
+    },
+    {
+      "id": "21",
+      "name": "Hot and Sour Soup",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "10 Minutes",
+      "description": "A comforting soup with mushrooms, tofu, bamboo shoots, and egg ribbons in a hot and sour broth.",
+      "prize": "₹179",
+      "img_url": "https://img.freepik.com/free-photo/top-view-chinese-sour-soup_141793-15516.jpg"
+    },
+    {
+      "id": "22",
+      "name": "Dim Sum Dumplings",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "15 Minutes",
+      "description": "Steamed dumplings stuffed with shrimp and pork, served with soy dipping sauce.",
+      "prize": "₹259",
+      "img_url": "https://img.freepik.com/free-photo/assorted-dumplings-plate-steamed_1205-2471.jpg"
+    },
+    {
+      "id": "23",
+      "name": "Beijing Duck",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "35 Minutes",
+      "description": "Crispy roasted duck served with pancakes, hoisin sauce, and sliced scallions.",
+      "prize": "₹599",
+      "img_url": "https://img.freepik.com/free-photo/chinese-peking-duck-served_114579-33542.jpg"
+    },
+    {
+      "id": "24",
+      "name": "Fried Rice",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "12 Minutes",
+      "description": "Wok-fried rice with eggs, vegetables, soy sauce, and your choice of chicken or shrimp.",
+      "prize": "₹229",
+      "img_url": "https://img.freepik.com/free-photo/fried-rice-with-shrimp-vegetables_1339-163807.jpg"
+    },
+    {
+      "id": "25",
+      "name": "Sesame Chicken",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "22 Minutes",
+      "description": "Crispy chicken bites glazed in a sweet soy and sesame sauce, garnished with sesame seeds.",
+      "prize": "₹319",
+      "img_url": "https://img.freepik.com/free-photo/sesame-chicken-served-bowl_114579-33544.jpg"
+    },
+    {
+      "id": "26",
+      "name": "Crispy Chilli Baby Corn",
+      "category": "Chinese",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "18 Minute",
+      "description": "Baby corn deep-fried until golden and tossed in a tangy, spicy sauce with onions, capsicum, and spring onions.",
+      "prize": "₹249",
+      "img_url": "https://img.freepik.com/free-photo/crispy-baby-corn-chilli-masala_123827-26721.jpg"
+    },
+    {
+      "id": "27",
+      "name": "Chicken Manchurian",
+      "category": "Chinese",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "22 Minute",
+      "description": "Juicy chicken meatballs simmered in a flavorful Manchurian sauce with garlic, soy, and green onions — served with fried rice or noodles.",
+      "prize": "₹329",
+      "img_url": "https://img.freepik.com/free-photo/chicken-manchurian-gravy-bowl_123827-28411.jpg"
+    }
   ]
 }

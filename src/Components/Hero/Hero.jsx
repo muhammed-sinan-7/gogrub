@@ -1,9 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Hero() {
+
+  const navigate= useNavigate()
   return (
     <div>
-       <div className="relative isolate px-6 pt-14 lg:px-8">
+       <div className="relative  px-6 pt-14 lg:px-8">
       {/* Top gradient background */}
       <div
         aria-hidden="true"
@@ -38,6 +41,7 @@ function Hero() {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <button
               href="#"
+              onClick={()=> navigate('/products')}
               className="rounded-md bg-amber-600 cursor-pointer px-3.5 py-2.5 text-xl font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
               Let’s Eat!

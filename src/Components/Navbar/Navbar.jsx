@@ -51,7 +51,7 @@ function Navbar({isLoggedIn,user}) {
 
 
           <div className="hidden md:flex items-center space-x-6 flex-shrink-0">
-            <button className="flex items-center space-x-1 text-gray-800 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-semibold transition-colors relative">
+            <button className="flex items-center space-x-1 text-gray-800 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-semibold transition-colors relative" onClick={()=> navigate('/products')}>
               <ShoppingCart className="h-5 w-5" />
               <span>Cart</span>
               <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
