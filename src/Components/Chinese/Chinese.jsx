@@ -10,7 +10,7 @@ function Chinese() {
   useEffect(() => {
     const fetchSpecial = async () => {
       try {
-        let res = await axios.get("http://localhost:3005/product?category=Chinese");
+        let res = await axios.get("https://gogrub-api-mock.onrender.com/product?category=Chinese");
         console.log(res.data);
         setChinese(res.data)
       } catch (error) {

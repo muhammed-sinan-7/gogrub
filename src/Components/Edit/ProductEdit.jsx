@@ -21,7 +21,7 @@ const ProductEdit = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:3005/product/${id}`);
+        const res = await axios.get(`https://gogrub-api-mock.onrender.com/product/${id}`);
         setFormData(res.data);
       } catch (error) {
         console.error("Failed to fetch product:", error);
@@ -43,7 +43,7 @@ const ProductEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3005/product/${id}`, formData);
+      await axios.put(`https://gogrub-api-mock.onrender.com/product/${id}`, formData);
       console.log("Product updated!");
       navigate("/products"); // optional: redirect after update
     } catch (error) {

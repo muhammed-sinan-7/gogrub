@@ -19,7 +19,7 @@ function AllProducts() {
   const fetchProducts = async () => {
     try {
       setLoading(true)
-      const res = await axios.get(`http://localhost:3005/product`)
+      const res = await axios.get(`https://gogrub-api-mock.onrender.com/product`)
       setFoods(res.data)
       setError(null)
     } catch (err) {

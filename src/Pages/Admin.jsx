@@ -23,7 +23,7 @@ const AdminPanel = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const fetchUser = async () => {
-      let res = await axios("http://localhost:3005/users?isAdmin=false");
+      let res = await axios("https://gogrub-api-mock.onrender.com/users?isAdmin=false");
       setUsers(res.data);
       console.log(res.data);
     };
@@ -32,7 +32,7 @@ const AdminPanel = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      let res = await axios("http://localhost:3005/product");
+      let res = await axios("https://gogrub-api-mock.onrender.com/product");
       setProduct(res.data);
       console.log(res.data);
     };
@@ -40,7 +40,7 @@ const AdminPanel = () => {
   }, []);
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3005/product/${id}`);
+      await axios.delete(`https://gogrub-api-mock.onrender.com/product/${id}`);
       // After deleting, update frontend state by filtering out deleted product
       setProduct(product.filter((item) => item.id !== id));
     } catch (error) {

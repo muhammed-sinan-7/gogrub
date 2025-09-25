@@ -56,7 +56,7 @@ const Payment = () => {
         orders: [...(user.orders || []),{...order,  status: "Pending"}],
       };
 
-      await axios.patch(`http://localhost:3005/users/${user.id}`, updatedUser);
+      await axios.patch(`https://gogrub-api-mock.onrender.com/users/${user.id}`, updatedUser);
 
       
       localStorage.setItem("activeUser", JSON.stringify(updatedUser));

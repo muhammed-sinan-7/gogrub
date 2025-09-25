@@ -45,7 +45,7 @@ export const UserProvider = ({ children }) => {
       const user = JSON.parse(savedUser);
       // Fetch latest user data from backend
       axios
-        .get(`http://localhost:3005/users/${user.id}`)
+        .get(`https://gogrub-api-mock.onrender.com/users/${user.id}`)
         .then((res) => {
           dispatch({ type: "SET_USER", payload: res.data });
         })
@@ -69,7 +69,7 @@ export const UserProvider = ({ children }) => {
     if (state.user?.id) {
       const updatedUser = { ...state.user, cart, wishlist };
       await axios.patch(
-        `http://localhost:3005/users/${state.user.id}`,
+        `https://gogrub-api-mock.onrender.com/users/${state.user.id}`,
         updatedUser
       );
       localStorage.setItem("activeUser", JSON.stringify(updatedUser));

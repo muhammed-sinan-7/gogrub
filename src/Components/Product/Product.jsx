@@ -41,7 +41,7 @@ function Product() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        let res = await axios.get(`http://localhost:3005/product/${id}`);
+        let res = await axios.get(`https://gogrub-api-mock.onrender.com/product/${id}`);
         console.log(res.data);
         setDatas(res.data);
         setError(null);

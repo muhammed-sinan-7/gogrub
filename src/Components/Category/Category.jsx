@@ -10,7 +10,7 @@ function Category() {
   useEffect(() => {
     const fetchCate =async () => {
       try {
-        let res = await axios.get(`http://localhost:3005/product?category=${name}`)
+        let res = await axios.get(`https://gogrub-api-mock.onrender.com/product?category=${name}`)
         console.log(res.data);
         
         setFood(res.data)
