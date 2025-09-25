@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useEffect, useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+// import axios from 'axios';
+import React, { useState, useRef } from 'react';
+// import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 function Card({ name, price, img, category }) {
   const scrollRef = useRef(null);
