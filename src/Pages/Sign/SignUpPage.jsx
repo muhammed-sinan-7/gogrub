@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import '../Sign/SignUp.css'
+
 import Login from '../../Components/Auth/Login';
 import Signup from '../../Components/Auth/Signup';
 import { useSearchParams } from 'react-router-dom';
-import '../Sign/Signuppage.css'
+
 
 function SignUpPage() {
   const [searchParams] = useSearchParams();

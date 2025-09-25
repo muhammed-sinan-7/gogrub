@@ -1,5 +1,5 @@
 
-import '../Category/CategoryButton.css';
+
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function CategoryButton() {

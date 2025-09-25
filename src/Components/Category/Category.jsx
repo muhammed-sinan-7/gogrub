@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react'
-import '../Category/Category.css'
+
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { Heart,ShoppingCart } from 'lucide-react'
