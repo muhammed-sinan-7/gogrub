@@ -54,7 +54,7 @@ function SpecialFoods() {
       <div className="flex justify-between items-center">
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800">Top Foods</h2>
         
-        Navigation Buttons - Top Right
+        
         <div className="flex gap-2">
           <button
             onClick={slideLeft}

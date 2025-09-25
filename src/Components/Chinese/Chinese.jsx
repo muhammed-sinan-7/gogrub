@@ -20,33 +20,33 @@ function Chinese() {
     fetchSpecial()
   }, [])
 
-  // const slideLeft = () => {
-  //   if (scrollRef.current) {
-  //     const container = scrollRef.current;
-  //     const cardWidth = container.children[0]?.offsetWidth || 224;
-  //     const gap = window.innerWidth >= 1024 ? 36 : window.innerWidth >= 768 ? 24 : window.innerWidth >= 640 ? 16 : 16;
-  //     const scrollAmount = cardWidth + gap;
+  const slideLeft = () => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const cardWidth = container.children[0]?.offsetWidth || 224;
+      const gap = window.innerWidth >= 1024 ? 36 : window.innerWidth >= 768 ? 24 : window.innerWidth >= 640 ? 16 : 16;
+      const scrollAmount = cardWidth + gap;
 
-  //     container.scrollBy({
-  //       left: -scrollAmount,
-  //       behavior: 'smooth'
-  //     });
-  //   }
-  // };
+      container.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
-  // const slideRight = () => {
-  //   if (scrollRef.current) {
-  //     const container = scrollRef.current;
-  //     const cardWidth = container.children[0]?.offsetWidth || 224;
-  //     const gap = window.innerWidth >= 1024 ? 36 : window.innerWidth >= 768 ? 24 : window.innerWidth >= 640 ? 16 : 16;
-  //     const scrollAmount = cardWidth + gap;
+  const slideRight = () => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const cardWidth = container.children[0]?.offsetWidth || 224;
+      const gap = window.innerWidth >= 1024 ? 36 : window.innerWidth >= 768 ? 24 : window.innerWidth >= 640 ? 16 : 16;
+      const scrollAmount = cardWidth + gap;
 
-  //     container.scrollBy({
-  //       left: scrollAmount,
-  //       behavior: 'smooth'
-  //     });
-  //   }
-  // };
+      container.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col gap-6 sm:gap-8 lg:gap-12 p-4 sm:p-6 lg:p-8 lg:ml-55 lg:mr-55">
@@ -55,7 +55,7 @@ function Chinese() {
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800">Chinese Dishes</h2>
         
         {/* Navigation Buttons - Top Right */}
-        {/* <div className="flex gap-2">
+        <div className="flex gap-2">
           <button
             onClick={slideLeft}
             className="bg-orange-500 hover:bg-orange-600 shadow-lg rounded-full p-2 transition-colors"
@@ -72,7 +72,7 @@ function Chinese() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
-        </div> */}
+        </div>
       </div>
 
       {/* Cards Container */}
