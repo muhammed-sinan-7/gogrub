@@ -1,0 +1,52 @@
+
+import { Route, Routes  } from 'react-router-dom'
+import './App.css'
+
+import Navbar from './Components/Navbar/Navbar'
+import Home from './Pages/Home'
+import SignUpPage from './Pages/Sign/SignUpPage'
+import Category from './Components/Category/Category'
+import AllProducts from './Components/All/AllProducts'
+import Cart from './Components/Cart/Cart'
+import Product from './Components/Product/Product'
+import { useEffect, useState } from 'react'
+import Login from './Components/Auth/Login'
+import Payment from './Components/Payment/payment'
+import Wishlist from './Components/Wishlist/wishlist'
+import Admin from './Pages/Admin'
+import ProductEdit from './Components/Edit/ProductEdit'
+
+function App() {
+const [user,setUser] = useState(null)
+
+useEffect(()=>{
+  const savedUser = localStorage.getItem("activeUser")
+  if(savedUser){
+    setUser(JSON.parse(savedUser))
+  }
+},[])
+
+
+  return (
+    <>
+     
+    
+      <Routes>
+          <Route path="/"  element={<Home />}/>
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/category/:name" element={<Category />} />
+          <Route path="/products" element={<AllProducts />} /> 
+          <Route path="/product/:id" element={<Product />} />
+          <Route path='/cart' element={<Cart/>}/>
+          <Route path='/payment/:id' element={<Payment/>}/>
+          <Route path='/wishlist' element={<Wishlist/>}/>
+          <Route path='/admin' element={<Admin/>}/>
+          <Route path='/editproduct/:id' element={<ProductEdit/>}/>
+          
+          {/* more routes */}
+      </Routes>
+    </>
+  )
+}
+
+export default App

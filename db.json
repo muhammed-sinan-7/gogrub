@@ -1,0 +1,224 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin@123",
+      "isAdmin": true
+    },
+    {
+      "id": "5237",
+      "name": "vaishak",
+      "email": "vaishak@gmail.com",
+      "password": "vaishak123",
+      "cpassword": "vaishak123",
+      "cart": [],
+      "wishlist": [],
+      "isBlock": false,
+      "isAdmin": false,
+      "orders": [
+        {
+          "id": 1758718283339,
+          "items": [
+            {
+              "id": "3",
+              "name": "Golden Tiger Roll Sushi",
+              "category": "Sushi",
+              "isSpecial": true,
+              "isStock": true,
+              "est_time": "18 Minute",
+              "description": "The Golden Tiger Roll is a decadent sushi roll filled with crispy shrimp tempura, creamy avocado, and often cream cheese, then topped with spicy crab, drizzled with spicy mayo and eel sauce, and finished with a crunchy, flavorful garnish.",
+              "price": 279,
+              "img_url": "https://img.freepik.com/free-photo/grilled-eel-unagi-fish-sushi-maki-roll-with-sweet-sauce_74190-6296.jpg",
+              "quantity": 1
+            }
+          ],
+          "total": 279,
+          "method": "card",
+          "date": "2025-09-24T12:51:23.339Z",
+          "status": "Delivered"
+        }
+      ]
+    },
+    {
+      "id": "6406",
+      "name": "sinan",
+      "email": "sin@",
+      "password": "ssssss",
+      "cpassword": "ssssss",
+      "cart": [],
+      "wishlist": [],
+      "isBlock": false,
+      "isAdmin": false,
+      "orders": [
+        {
+          "id": 1758724712566,
+          "items": [
+            {
+              "id": "2",
+              "name": "Smoky Bourbon BBQ Burgerdd",
+              "category": "Burgers",
+              "isSpecial": true,
+              "isStock": true,
+              "est_time": "15 Minute",
+              "description": "Sink your teeth into a juicy, perfectly grilled beef patty glazed with a rich smoky bourbon BBQ sauce. Topped with melted cheddar, crispy onion rings, fresh lettuce, and ripe tomatoes, all sandwiched between a toasted brioche bun. Every bite delivers a smoky, tangy, and slightly sweet flavor explosion that’s irresistible for burger lovers.",
+              "price": "230",
+              "img_url": "https://img.freepik.com/free-photo/fast-food-menu-with-energy-drink-cans_114579-2136.jpg",
+              "quantity": 1
+            }
+          ],
+          "total": 230,
+          "method": "card",
+          "date": "2025-09-24T14:38:32.566Z",
+          "status": "Pending"
+        }
+      ]
+    }
+  ],
+  "product": [
+    {
+      "id": "1",
+      "name": "Midnight Margherita",
+      "category": "Pizza",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "20 Minute",
+      "description": "A perfect blend of simplicity and flavor, this pizza features a golden, thin-crust base topped with rich tomato sauce, fresh mozzarella, and fragrant basil leaves. Baked to perfection, its melty cheese and aromatic herbs create a comforting, classic taste that’s perfect for late-night cravings.",
+      "price": "200",
+      "img_url": "https://img.freepik.com/free-photo/close-up-delicious-pizza_23-2150852213.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Smoky Bourbon BBQ Burgerdd",
+      "category": "Burgers",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "Sink your teeth into a juicy, perfectly grilled beef patty glazed with a rich smoky bourbon BBQ sauce. Topped with melted cheddar, crispy onion rings, fresh lettuce, and ripe tomatoes, all sandwiched between a toasted brioche bun. Every bite delivers a smoky, tangy, and slightly sweet flavor explosion that’s irresistible for burger lovers.",
+      "price": "230",
+      "img_url": "https://img.freepik.com/free-photo/fast-food-menu-with-energy-drink-cans_114579-2136.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Golden Tiger Roll Sushi",
+      "category": "Sushi",
+      "isSpecial": false,
+      "isStock": true,
+      "est_time": "18 Minute",
+      "description": "The Golden Tiger Roll is a decadent sushi roll filled with crispy shrimp tempura, creamy avocado, and often cream cheese, then topped with spicy crab, drizzled with spicy mayo and eel sauce, and finished with a crunchy, flavorful garnish.",
+      "price": 279,
+      "img_url": "https://img.freepik.com/free-photo/grilled-eel-unagi-fish-sushi-maki-roll-with-sweet-sauce_74190-6296.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Saffron Butter Prawns",
+      "category": "Seafood",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "23 Minute",
+      "description": "Succulent prawns gently sautéed in a rich saffron-infused butter sauce, finished with a touch of cream and aromatic spices",
+      "price": 479,
+      "img_url": "https://img.freepik.com/free-photo/delicious-seafood-table_23-2150857704.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Paneer Tikka Masala Deluxe",
+      "category": "Vegetarian",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "Char-grilled cubes of marinated paneer simmered in a luxurious, spiced tomato-cream gravy with peppers, onions, and aromatic herbs",
+      "price": 239,
+      "img_url": "https://img.freepik.com/free-photo/healthy-homemade-meal-beef-curry-with-naan-generated-by-ai_188544-41071.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Lemon Garlic Butter Salmon",
+      "category": "Seafood",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "20 Minute",
+      "description": "Fresh salmon fillet pan-seared and finished in a silky lemon-garlic butter sauce, accented with herbs for a bright, melt-in-the-mouth flavor.",
+      "price": 339,
+      "img_url": "https://img.freepik.com/free-photo/tasty-mahi-mahi-fish-still-life_23-2150457350.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Wild Mushroom Risotto",
+      "category": "Vegetarian",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "10 Minute",
+      "description": "Creamy Arborio rice slowly cooked with a medley of wild mushrooms, finished with Parmesan, fresh herbs and a drizzle of truffle oil.",
+      "price": 259,
+      "img_url": "https://img.freepik.com/free-photo/edible-mushroom-risotto-with-parsley-parmesan-cheese-generated-by-ai_188544-38463.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Pistachio Rose Delight",
+      "category": "Desserts",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "20 Minute",
+      "description": "A delicate fusion of creamy pistachio and fragrant rose, layered into a luscious dessert finished with nuts and a hint of sweetness.",
+      "price": 349,
+      "img_url": "https://img.freepik.com/free-photo/side-view-pistachio-cookies-red-plate-black-background_176474-3878.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Spicy Volcano Maki",
+      "category": "Rolls",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "A fiery sushi roll packed with spicy tuna and avocado, topped with a baked creamy seafood mix and drizzled with tangy volcano sauce for a bold, erupting flavor.",
+      "price": 349,
+      "img_url": "https://img.freepik.com/free-photo/sushi-roll-set-desk-topped-with-sauce-top-view_141793-13082.jpg"
+    },
+    {
+      "id": "11",
+      "name": "Kung Pao Chicken",
+      "category": "Chinese",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "18 Minute",
+      "description": "A flavorful stir-fry dish made with tender chicken, roasted peanuts, bell peppers, and dried chilies, all tossed in a tangy, spicy soy-based sauce.",
+      "price": 329,
+      "img_url": "https://img.freepik.com/free-photo/kung-pao-chicken-vegetable-dish-with-bowl-rice_23-2148137172.jpg"
+    },
+    {
+      "id": "12",
+      "name": "Sweet and Sour Pork",
+      "category": "Chinese",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "22 Minute",
+      "description": "Crispy fried pork chunks coated in a vibrant sweet and sour sauce, made with pineapples, bell peppers, and a tangy vinegar-based sauce.",
+      "price": 369,
+      "img_url": "https://img.freepik.com/free-photo/sweet-and-sour-pork-chopsticks_23-2147882760.jpg"
+    },
+    {
+      "id": "13",
+      "name": "Dim Sum Platter",
+      "category": "Chinese",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "15 Minute",
+      "description": "A variety of bite-sized Chinese dumplings, buns, and spring rolls, steamed or fried, served with dipping sauces.",
+      "price": 249,
+      "img_url": "https://img.freepik.com/free-photo/assorted-dim-sum-dumplings-steamed-buns-dipping-sauce_23-2148832387.jpg"
+    },
+    {
+      "id": "14",
+      "name": "Mapo Tofu",
+      "category": "Chinese",
+      "isSpecial": true,
+      "isStock": true,
+      "est_time": "20 Minute",
+      "description": "Silken tofu cooked in a spicy, flavorful Sichuan sauce with minced pork, chili oil, and a hint of garlic, served over rice.",
+      "price": 289,
+      "img_url": "https://img.freepik.com/free-photo/mapo-tofu-spicy-chinese-dish_23-2150257635.jpg"
+    }
+  ]
+}
