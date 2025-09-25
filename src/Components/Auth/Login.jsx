@@ -32,7 +32,7 @@ function Login() {
 
     try {
       const res = await axios.get(
-        `http://localhost:3005/users?email=${email}&password=${password}`
+        `https://gogrub-api-mock.onrender.com/users?email=${email}&password=${password}`
       );
 
       if (res.data.length > 0) {
@@ -40,7 +40,7 @@ function Login() {
 
         // Fetch full user data by ID to get cart + wishlist reliably
         const fullUser = await axios.get(
-          `http://localhost:3005/users/${user.id}`
+          `https://gogrub-api-mock.onrender.com/users/${user.id}`
         );
 
         login(fullUser.data);

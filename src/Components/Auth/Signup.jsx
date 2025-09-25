@@ -37,7 +37,7 @@ function Signup() {
         const userData = { name, email, password, cpassword, cart, wishlist ,isBlock:false,isAdmin:false, orders , };
 
         try {
-            const res = await axios.post("http://localhost:3005/users", userData, {
+            const res = await axios.post("https://gogrub-api-mock.onrender.com/users", userData, {
                 headers: { "Content-Type": "application/json" },
             });
 
