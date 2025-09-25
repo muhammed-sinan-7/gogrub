@@ -15,7 +15,7 @@ function Category() {
         
         setFood(res.data)
       } catch (error) {
-        setFood("No Items Available")
+        setFood([])
       }
     }
     fetchCate()

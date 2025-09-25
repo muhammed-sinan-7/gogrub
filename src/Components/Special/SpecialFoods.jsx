@@ -14,7 +14,7 @@ function SpecialFoods() {
         console.log(res.data);
         setSpecial(res.data)
       } catch (error) {
-        setSpecial("Items Not Available")
+        setSpecial([])
       }
     }
     fetchSpecial()

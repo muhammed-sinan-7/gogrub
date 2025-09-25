@@ -14,7 +14,7 @@ function Chinese() {
         console.log(res.data);
         setChinese(res.data)
       } catch (error) {
-        setChinese("Items Not Available")
+        setChinese([])
       }
     }
     fetchSpecial()

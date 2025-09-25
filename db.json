@@ -74,6 +74,40 @@
           "status": "Pending"
         }
       ]
+    },
+    {
+      "id": "1a8f",
+      "name": "khaleel",
+      "email": "khaleel@123",
+      "password": "khaleel",
+      "cpassword": "khaleel",
+      "cart": [],
+      "wishlist": [],
+      "isBlock": false,
+      "isAdmin": false,
+      "orders": [
+        {
+          "id": 1758779204787,
+          "items": [
+            {
+              "id": "2",
+              "name": "Smoky Bourbon BBQ Burgerdd",
+              "category": "Burgers",
+              "isSpecial": true,
+              "isStock": true,
+              "est_time": "15 Minute",
+              "description": "Sink your teeth into a juicy, perfectly grilled beef patty glazed with a rich smoky bourbon BBQ sauce. Topped with melted cheddar, crispy onion rings, fresh lettuce, and ripe tomatoes, all sandwiched between a toasted brioche bun. Every bite delivers a smoky, tangy, and slightly sweet flavor explosion that’s irresistible for burger lovers.",
+              "price": "230",
+              "img_url": "https://img.freepik.com/free-photo/fast-food-menu-with-energy-drink-cans_114579-2136.jpg",
+              "quantity": 1
+            }
+          ],
+          "total": 230,
+          "method": "card",
+          "date": "2025-09-25T05:46:44.787Z",
+          "status": "Shipped"
+        }
+      ]
     }
   ],
   "product": [
@@ -85,7 +119,7 @@
       "isStock": true,
       "est_time": "20 Minute",
       "description": "A perfect blend of simplicity and flavor, this pizza features a golden, thin-crust base topped with rich tomato sauce, fresh mozzarella, and fragrant basil leaves. Baked to perfection, its melty cheese and aromatic herbs create a comforting, classic taste that’s perfect for late-night cravings.",
-      "price": "200",
+      "price": "250",
       "img_url": "https://img.freepik.com/free-photo/close-up-delicious-pizza_23-2150852213.jpg"
     },
     {
