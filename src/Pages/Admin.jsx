@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import {
   LayoutDashboard,
   Users,
   ShoppingCart,
   Package,
-  TrendingUp,
-  DollarSign,
   Eye,
   Edit,
   Trash2,
   Plus,
-  Currency,
+  
   IndianRupee,
 } from "lucide-react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 const AdminPanel = () => {
-  const { id } = useParams();
+//   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("dashboard");
   const [users, setUsers] = useState([]);
   const [product, setProduct] = useState([]);

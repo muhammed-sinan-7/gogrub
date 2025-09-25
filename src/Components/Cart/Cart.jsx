@@ -1,5 +1,5 @@
 // ShoppingCart.js
-import React from "react";
+
 import { Plus, Minus, Trash2, ShoppingBag, CreditCard } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Context/UserContext";

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Hero from '../Components/Hero/Hero';
 import SpecialFoods from '../Components/Special/SpecialFoods';
 // import Category from '../Components/Category/Category';

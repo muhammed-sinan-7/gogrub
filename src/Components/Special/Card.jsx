@@ -1,5 +1,5 @@
 // import axios from 'axios';
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 // import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 function Card({ name, price, img, category }) {

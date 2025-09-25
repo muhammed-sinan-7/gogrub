@@ -1,5 +1,5 @@
 // Wishlist.js
-import React from "react";
+
 import { Heart, ShoppingCart, Trash2 } from "lucide-react";
 import { useUser } from "../../Context/UserContext";
 import Navbar from "../Navbar/Navbar";

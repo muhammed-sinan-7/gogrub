@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './Context/UserContext.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/gogrub">
+    <BrowserRouter >
       <UserProvider>
 
         <App />
