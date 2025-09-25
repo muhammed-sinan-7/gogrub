@@ -37,9 +37,9 @@ function Signup() {
         const userData = { name, email, password, cpassword, cart, wishlist ,isBlock:false,isAdmin:false, orders , };
 
         try {
-            const res = await axios.post("https://gogrub-api-mock.onrender.com/users", userData, {
-                headers: { "Content-Type": "application/json" },
-            });
+            const res = await axios.post("https://gogrub-api-mock.onrender.com/users", userData, 
+         
+            );
 
             console.log("Data Saved", res.data);
 
