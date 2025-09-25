@@ -8,7 +8,7 @@ const Payment = () => {
   const { cart, user } = contextState;
   const navigate = useNavigate();
   const { state: locationState } = useLocation(); // 👈 to read passed product
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const [method, setMethod] = useState("card");
   const [form, setForm] = useState({
@@ -35,7 +35,6 @@ const Payment = () => {
       return;
     }
 
-    
     const order = {
       id: Date.now(),
       items: productFromBuyNow ? [productFromBuyNow] : cart,
@@ -53,12 +52,14 @@ const Payment = () => {
       // Save order to user
       const updatedUser = {
         ...user,
-        orders: [...(user.orders || []),{...order,  status: "Pending"}],
+        orders: [...(user.orders || []), { ...order, status: "Pending" }],
       };
 
-      await axios.patch(`https://gogrub-api-mock.onrender.com/users/${user.id}`, updatedUser);
+      await axios.patch(
+        `https://gogrub-api-mock.onrender.com/users/${user.id}`,
+        updatedUser
+      );
 
-      
       localStorage.setItem("activeUser", JSON.stringify(updatedUser));
 
       dispatch({ type: "SET_USER", payload: updatedUser });
@@ -76,13 +77,14 @@ const Payment = () => {
     }
   };
 
+ 
+
   const total = productFromBuyNow
     ? Number(productFromBuyNow.price) * Number(productFromBuyNow.quantity)
     : cart.reduce(
         (sum, item) => sum + Number(item.price) * Number(item.quantity),
         0
       );
-
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Payment</h1>

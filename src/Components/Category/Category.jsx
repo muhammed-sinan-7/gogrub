@@ -1,12 +1,14 @@
 import  { useEffect, useState } from 'react'
 
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Heart,ShoppingCart } from 'lucide-react'
 import Navbar from '../Navbar/Navbar'
 function Category() {
   const { name } = useParams()
   const [food, setFood] = useState([])
+  // const {id} = useParams()
+  const navigate = useNavigate()
   useEffect(() => {
     const fetchCate =async () => {
       try {
@@ -39,7 +41,7 @@ function Category() {
             className="bg-white  rounded-lg shadow-2xl overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
           >
             {/* Image Container */}
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden" onClick={() => navigate(`/product/${product.id}`)}>
               <img
                 src={product.img_url}
                 alt={product.name}

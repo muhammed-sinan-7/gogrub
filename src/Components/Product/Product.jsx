@@ -78,13 +78,18 @@ function Product() {
   };
 
   const handleBuyNow = () => {
-    if (!state?.user) {
-      navigate("/signup");
-      return;
-    }
-    
-    navigate(`/payment/${datas.id}`,{state: {product: {...datas,quantity}}});
+  const productToBuy = {
+    id: datas.id,
+    name: datas.name,
+    price: datas.price,
+    quantity: 1,
+    img_url: datas.img_url,
   };
+
+  navigate("/payment", {
+    state: { product: productToBuy },
+  });
+};
 
   if (loading) {
     return (

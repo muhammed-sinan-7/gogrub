@@ -38,7 +38,7 @@ useEffect(()=>{
           <Route path="/products" element={<AllProducts />} /> 
           <Route path="/product/:id" element={<Product />} />
           <Route path='/cart' element={<Cart/>}/>
-          <Route path='/payment/:id' element={<Payment/>}/>
+          <Route path='/payment/' element={<Payment/>}/>
           <Route path='/wishlist' element={<Wishlist/>}/>
           <Route path='/admin' element={<Admin/>}/>
           <Route path='/editproduct/:id' element={<ProductEdit/>}/>

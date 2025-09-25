@@ -44,8 +44,8 @@ const ProductEdit = () => {
     e.preventDefault();
     try {
       await axios.put(`https://gogrub-api-mock.onrender.com/product/${id}`, formData);
-      console.log("Product updated!");
-      navigate("/products"); // optional: redirect after update
+      alert("Product updated!");
+      navigate("/admin"); // optional: redirect after update
     } catch (error) {
       console.error("Update failed:", error);
     }
