@@ -253,8 +253,87 @@
       "description": "Silken tofu cooked in a spicy, flavorful Sichuan sauce with minced pork, chili oil, and a hint of garlic, served over rice.",
       "price": 289,
       "img_url": "https://img.freepik.com/free-photo/mapo-tofu-spicy-chinese-dish_23-2150257635.jpg"
+    },
+    {
+      "id": "101",
+      "name": "Cheesy Garlic Bread Combo",
+      "category": "Offer",
+      "price": "199",
+      "description": "Get 2 cheesy garlic breads + free dip at a special offer price.",
+      "img_url": "https://img.freepik.com/free-photo/garlic-bread-cheese.jpg"
+    },
+    {
+      "id": "102",
+      "name": "Burger + Fries + Coke",
+      "category": "Offer",
+      "price": "299",
+      "description": "Enjoy a full combo meal with burger, fries, and Coke at a discounted price.",
+      "img_url": "https://img.freepik.com/free-photo/burger-fries-combo.jpg"
+    },
+    {
+      "id": "103",
+      "name": "Family Pizza Pack",
+      "category": "Offer",
+      "price": "699",
+      "description": "2 large pizzas + 1 garlic bread + 2 soft drinks — perfect for family dining.",
+      "img_url": "https://img.freepik.com/free-photo/family-pizza-pack.jpg"
+    },
+    {
+      "id": "104",
+      "name": "Sweet Tooth Deal",
+      "category": "Offer",
+      "price": "149",
+      "description": "Buy 1 dessert, get the 2nd at 50% off.",
+      "img_url": "https://img.freepik.com/free-photo/chocolate-desserts.jpg"
+    },
+    {
+      "id": "105",
+      "name": "Spicy Fiesta Taco Combo",
+      "category": "Offer",
+      "price": "249",
+      "description": "2 tacos + nachos + soft drink at a special price.",
+      "img_url": "https://img.freepik.com/free-photo/spicy-taco-combo.jpg"
+    },
+    {
+      "id": "106",
+      "name": "Pasta Delight Offer",
+      "category": "Offer",
+      "price": "279",
+      "description": "Creamy pasta with garlic bread included, limited time offer.",
+      "img_url": "https://img.freepik.com/free-photo/creamy-pasta-dish.jpg"
+    },
+    {
+      "id": "107",
+      "name": "Seafood Platter Offer",
+      "category": "Offer",
+      "price": "599",
+      "description": "Get a platter of prawns, fish, and calamari at a discounted price.",
+      "img_url": "https://img.freepik.com/free-photo/seafood-platter.jpg"
+    },
+    {
+      "id": "108",
+      "name": "Breakfast Special Combo",
+      "category": "Offer",
+      "price": "199",
+      "description": "Pancakes + omelette + coffee at a morning special price.",
+      "img_url": "https://img.freepik.com/free-photo/breakfast-combo.jpg"
+    },
+    {
+      "id": "109",
+      "name": "Sushi Lover’s Deal",
+      "category": "Offer",
+      "price": "349",
+      "description": "Get a mix of sushi rolls at a special offer price.",
+      "img_url": "https://img.freepik.com/free-photo/sushi-rolls.jpg"
+    },
+    {
+      "id": "110",
+      "name": "Pizza + Dessert Combo",
+      "category": "Offer",
+      "price": "399",
+      "description": "Medium pizza with a dessert included at a discounted rate.",
+      "img_url": "https://img.freepik.com/free-photo/pizza-dessert-combo.jpg"
     }
-    
   
   ]
 }
