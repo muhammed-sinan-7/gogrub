@@ -38,6 +38,7 @@ const AdminPanel = () => {
     };
     fetchProducts();
   }, []);
+
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://gogrub-api-mock.onrender.com/product/${id}`);
@@ -432,7 +433,9 @@ const AdminPanel = () => {
                       <button className="text-blue-600 hover:text-blue-900">
                         <Eye className="w-4 h-4" />
                       </button>
-                      <button className="text-green-600 hover:text-green-900">
+                      <button 
+                      onClick={()=> navigate(`/editorder/${order.id}`)}
+                      className="text-green-600 hover:text-green-900">
                         <Edit className="w-4 h-4" />
                       </button>
                     </div>

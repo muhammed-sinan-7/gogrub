@@ -6,6 +6,7 @@ import CategoryButton from '../Components/Category/CategoryButton';
 import Chinese from '../Components/Chinese/Chinese';
 import Footer from '../Components/Footer/Footer';
 import Navbar from '../Components/Navbar/Navbar';
+import Offer from '../Components/Offer/Offer'
 function Home() {
 
 
@@ -18,6 +19,7 @@ function Home() {
       <CategoryButton />
       <SpecialFoods />
       <Chinese />
+      <Offer/>
       <Footer />
     </div>
 

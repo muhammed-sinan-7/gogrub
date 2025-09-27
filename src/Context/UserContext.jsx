@@ -10,7 +10,7 @@ const initialState = {
   wishlist: [],
 };
 
-const reducer = (state, action) => {
+ const reducer = (state, action) => {
   switch (action.type) {
     case "SET_USER":
       if (!action.payload) {
@@ -28,6 +28,7 @@ const reducer = (state, action) => {
           : state.wishlist,
       };
     case "SET_CART":
+      
       return { ...state, cart: action.payload };
     case "SET_WISHLIST":
       return { ...state, wishlist: action.payload };

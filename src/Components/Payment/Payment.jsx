@@ -7,7 +7,7 @@ const Payment = () => {
   const { state: contextState, dispatch } = useUser();
   const { cart, user } = contextState;
   const navigate = useNavigate();
-  const { state: locationState } = useLocation(); // 👈 to read passed product
+  const { state: locationState } = useLocation();
   // const { id } = useParams();
 
   const [method, setMethod] = useState("card");
@@ -64,7 +64,7 @@ const Payment = () => {
 
       dispatch({ type: "SET_USER", payload: updatedUser });
 
-      // if it's cart checkout, clear cart
+      
       if (!productFromBuyNow) {
         dispatch({ type: "SET_CART", payload: [] });
       }
@@ -113,16 +113,7 @@ const Payment = () => {
               />
               Cash on Delivery
             </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="method"
-                value="emi"
-                checked={method === "emi"}
-                onChange={() => setMethod("emi")}
-              />
-              EMI
-            </label>
+            
           </div>
         </div>
 
@@ -195,6 +186,7 @@ const Payment = () => {
             </span>
             <button
               type="submit"
+              onClick={handleSubmit}
               className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
             >
               {method === "cod" ? "Place Order" : "Pay Now"}

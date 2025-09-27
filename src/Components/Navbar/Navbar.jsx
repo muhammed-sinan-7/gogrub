@@ -122,7 +122,7 @@ function Navbar() {
                       }}
                       className="px-4 py-2 flex items-center gap-5 cursor-pointer hover:bg-orange-100"
                     >
-                      <img className="w-10 rounded-full" src={item.img_url} alt="" />
+                      <img className="w-10 rounded-ful" src={item.img_url} alt="" />
                       {item.name}
                     </li>
                   ))}
