@@ -7,19 +7,24 @@ import Chinese from '../Components/Chinese/Chinese';
 import Footer from '../Components/Footer/Footer';
 import Navbar from '../Components/Navbar/Navbar';
 import Offer from '../Components/Offer/Offer'
+import { useRef } from 'react';
 function Home() {
 
+ const offerRef = useRef(null); // ref to Offer section
 
+  const scrollToOffer = () => {
+    offerRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
 
     <div>
-      <Navbar/>
+      <Navbar onOffersClick={scrollToOffer}/>
       <Hero />
       <CategoryButton />
       <SpecialFoods />
       <Chinese />
-      <Offer/>
+      <Offer  ref={offerRef}/>
       <Footer />
     </div>
 

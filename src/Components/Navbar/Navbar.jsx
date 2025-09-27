@@ -18,7 +18,7 @@ import { useUser } from "../../Context/UserContext";
 import "../Navbar/Navbar.css";
 import axios from "axios";
 
-function Navbar() {
+function Navbar({ onOffersClick }) {
   const { state } = useUser(); // get state from UserContext
   const navigate = useNavigate();
   const [allitems, setAllItems] = useState([]);
@@ -29,8 +29,8 @@ function Navbar() {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
   // filtering search
-  let searched = allitems.filter((item) =>  {
-   return item.name.toLowerCase().includes(searchQuery.toLowerCase());
+  let searched = allitems.filter((item) => {
+    return item.name.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
   const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
@@ -110,19 +110,22 @@ function Navbar() {
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               />
 
-              
               {searchQuery && searched.length > 0 && (
                 <ul className="absolute left-0 right-0 bg-white border rounded-lg shadow-md mt-1 z-20 max-h-60 overflow-y-auto">
                   {searched.map((item) => (
                     <li
                       key={item.id}
                       onClick={() => {
-                        setSearchQuery(""); 
-                        navigate(`/product/${item.id}`); 
+                        setSearchQuery("");
+                        navigate(`/product/${item.id}`);
                       }}
                       className="px-4 py-2 flex items-center gap-5 cursor-pointer hover:bg-orange-100"
                     >
-                      <img className="w-10 rounded-ful" src={item.img_url} alt="" />
+                      <img
+                        className="w-10 rounded-ful"
+                        src={item.img_url}
+                        alt=""
+                      />
                       {item.name}
                     </li>
                   ))}
@@ -134,7 +137,9 @@ function Navbar() {
           <div className="hidden md:flex items-center space-x-6 flex-shrink-0">
             <button
               className="flex items-center space-x-1 text-gray-800 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-semibold transition-colors relative"
-              onClick={() => navigate("/cart")}
+              onClick={() => {
+                if (typeof onOffersClick === "function") onOffersClick();
+              }}
             >
               <TicketPercent className="h-5 w-5" />
               <span>Offers</span>
