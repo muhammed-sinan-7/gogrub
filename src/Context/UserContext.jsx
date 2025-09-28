@@ -10,15 +10,16 @@ const initialState = {
   wishlist: [],
 };
 
- const reducer = (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case "SET_USER":
       if (!action.payload) {
-        // clear everything when user is null
+        // logout or clear
         return { ...state, user: null, cart: [], wishlist: [] };
       }
       return {
         ...state,
+        user: action.payload, // ✅ FIX: store actual user
         cart: Array.isArray(action.payload.cart)
           ? action.payload.cart
           : state.cart,
@@ -26,11 +27,13 @@ const initialState = {
           ? action.payload.wishlist
           : state.wishlist,
       };
-    case "SET_CART":
 
+    case "SET_CART":
       return { ...state, cart: action.payload };
+
     case "SET_WISHLIST":
       return { ...state, wishlist: action.payload };
+
     default:
       return state;
   }
@@ -43,7 +46,7 @@ export const UserProvider = ({ children }) => {
     const savedUser = localStorage.getItem("activeUser");
     if (savedUser) {
       const user = JSON.parse(savedUser);
-      // Fetch latest user data from backend
+      // fetch latest user info
       axios
         .get(`https://gogrub-api-mock.onrender.com/users/${user.id}`)
         .then((res) => {
@@ -56,7 +59,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const login = (userData) => {
-    dispatch({ type: "SET_USER", payload: userData }); // includes cart & wishlist
+    dispatch({ type: "SET_USER", payload: userData });
     localStorage.setItem("activeUser", JSON.stringify(userData));
   };
 
@@ -73,8 +76,7 @@ export const UserProvider = ({ children }) => {
         updatedUser
       );
       localStorage.setItem("activeUser", JSON.stringify(updatedUser));
-      dispatch({ type: "SET_CART", payload: cart });
-      dispatch({ type: "SET_WISHLIST", payload: wishlist });
+      dispatch({ type: "SET_USER", payload: updatedUser }); // ✅ keep everything in sync
     }
   };
 
@@ -121,14 +123,12 @@ export const UserProvider = ({ children }) => {
     if (exists) return;
     const updatedWishlist = [...state.wishlist, product];
     dispatch({ type: "SET_WISHLIST", payload: updatedWishlist });
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     syncUserData(state.cart, updatedWishlist);
   };
 
   const removeFromWishlist = (id) => {
     const updatedWishlist = state.wishlist.filter((item) => item.id !== id);
     dispatch({ type: "SET_WISHLIST", payload: updatedWishlist });
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     syncUserData(state.cart, updatedWishlist);
   };
 
