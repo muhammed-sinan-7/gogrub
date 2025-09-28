@@ -49,7 +49,7 @@ const Offer = forwardRef((props, ref) => {
     >
       <div className="flex justify-between items-center">
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800">
-          Offer Dishes
+          Top Offers
         </h2>
         <div className="flex gap-2">
           <button

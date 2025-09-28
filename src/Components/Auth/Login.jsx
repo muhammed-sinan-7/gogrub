@@ -21,14 +21,14 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // First, validate the inputs
+    
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    setLoading(true); // Set loading to true before making the request
+    setLoading(true); // 
 
     try {
       const res = await axios.get(
@@ -38,7 +38,7 @@ function Login() {
       if (res.data.length > 0) {
         const user = res.data[0];
 
-        // Fetch full user data by ID to get cart + wishlist reliably
+
         const fullUser = await axios.get(
           `https://gogrub-api-mock.onrender.com/users/${user.id}`
         );
@@ -46,12 +46,12 @@ function Login() {
         login(fullUser.data);
         alert("Login Successful");
 
-        // Check user type and navigate accordingly
+        
         if (fullUser.data.isAdmin === true) {
           console.log(fullUser.data.isAdmin)
-          navigate("/admin"); // Navigate to admin dashboard
+          navigate("/admin"); 
         } else {
-          navigate("/"); // Navigate to home page
+          navigate("/");
         }
       } else {
         setErrors({ general: "Invalid credentials" });
@@ -60,7 +60,7 @@ function Login() {
       setErrors({ general: "Something went wrong, please try again later" });
       console.error(error);
     } finally {
-      setLoading(false); // Set loading to false after the request completes
+      setLoading(false);
     }
   };
 

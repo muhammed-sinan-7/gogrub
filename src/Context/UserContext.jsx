@@ -19,7 +19,6 @@ const initialState = {
       }
       return {
         ...state,
-        user: action.payload,
         cart: Array.isArray(action.payload.cart)
           ? action.payload.cart
           : state.cart,
@@ -28,7 +27,7 @@ const initialState = {
           : state.wishlist,
       };
     case "SET_CART":
-      
+
       return { ...state, cart: action.payload };
     case "SET_WISHLIST":
       return { ...state, wishlist: action.payload };
