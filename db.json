@@ -278,14 +278,7 @@
       "description": "2 large pizzas + 1 garlic bread + 2 soft drinks — perfect for family dining.",
       "img_url": "https://img.freepik.com/free-photo/delicious-pizza-studio_23-2151846558.jpg"
     },
-    {
-      "id": "111",
-      "name": "Burger Combo Feast",
-      "category": "Offer",
-      "price": "189",
-      "description": "Cheese burger + fries + cold drink at a combo price.",
-      "img_url": "https://img.freepik.com/free-photo/delicious-burger-fries-combo.jpg"
-    },
+    
     {
       "id": "112",
       "name": "Grilled Chicken Meal",
