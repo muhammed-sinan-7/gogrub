@@ -56,13 +56,37 @@ const Offer = forwardRef((props, ref) => {
             onClick={slideLeft}
             className="bg-orange-500 hover:bg-orange-600 shadow-lg rounded-full p-2 transition-colors"
           >
-            ◀
+            <svg
+              className="w-4 h-4 sm:w-5 sm:h-5 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
           </button>
           <button
             onClick={slideRight}
             className="bg-orange-500 hover:bg-orange-600 shadow-lg rounded-full p-2 transition-colors"
           >
-            ▶
+            <svg
+              className="w-4 h-4 sm:w-5 sm:h-5 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </button>
         </div>
       </div>

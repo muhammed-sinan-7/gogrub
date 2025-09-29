@@ -16,6 +16,7 @@ import Admin from "./Pages/Admin";
 import ProductEdit from "./Components/Edit/ProductEdit";
 import OrderEdit from "./Components/Edit/OrderEdit";
 import Profile from "./Components/Profile";
+import AddProduct from "./Components/AddProduct";
 function App() {
   const [user, setUser] = useState(null);
 
@@ -41,8 +42,9 @@ function App() {
         <Route path="/editproduct/:id" element={<ProductEdit />} />
         <Route path="/editorder/:id" element={<OrderEdit />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/addproduct" element={<AddProduct/>}/>
 
-        {/* more routes */}
+       
       </Routes>
     </>
   );

@@ -1,3 +1,4 @@
+// src/pages/Payment.jsx
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../../Context/UserContext";
@@ -40,6 +41,9 @@ const Payment = () => {
       return;
     }
 
+    // Save address globally so Profile can use it
+    localStorage.setItem("deliveryAddress", form.address);
+
     const order = {
       id: Date.now(),
       items: productFromBuyNow ? [productFromBuyNow] : cart,
@@ -73,7 +77,7 @@ const Payment = () => {
       }
 
       alert(`Payment successful using ${method.toUpperCase()}!`);
-      navigate("/");
+      navigate("/profile");
     } catch (err) {
       console.error("Error saving order:", err);
       alert("Something went wrong. Please try again.");
@@ -93,7 +97,6 @@ const Payment = () => {
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Payment</h1>
 
-      {/* Responsive Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Order Summary */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-fit">

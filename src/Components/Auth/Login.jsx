@@ -1,5 +1,5 @@
 import axios from "axios";
-import  { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Context/UserContext";
 
@@ -21,16 +21,16 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    setLoading(true); // 
+    setLoading(true);
 
     try {
+     
       const res = await axios.get(
         `https://gogrub-api-mock.onrender.com/users?email=${email}&password=${password}`
       );
@@ -38,18 +38,24 @@ function Login() {
       if (res.data.length > 0) {
         const user = res.data[0];
 
-
+        
         const fullUser = await axios.get(
           `https://gogrub-api-mock.onrender.com/users/${user.id}`
         );
 
-        login(fullUser.data);
-        alert("Login Successful");
+        const userData = fullUser.data;
 
         
-        if (fullUser.data.isAdmin === true) {
-          console.log(fullUser.data.isAdmin)
-          navigate("/admin"); 
+        if (userData.isBlock === true) {
+          setErrors({ general: "Your account is blocked. Contact support." });
+          return; 
+        }
+
+        login(userData);
+        alert("Login Successful");
+
+        if (userData.isAdmin === true) {
+          navigate("/admin");
         } else {
           navigate("/");
         }
