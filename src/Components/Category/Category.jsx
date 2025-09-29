@@ -4,9 +4,11 @@ import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Heart,ShoppingCart } from 'lucide-react'
 import Navbar from '../Navbar/Navbar'
+import { useUser } from '../../Context/UserContext'
 function Category() {
   const { name } = useParams()
   const [food, setFood] = useState([])
+  const {addToCart} = useUser()
   // const {id} = useParams()
   const navigate = useNavigate()
   useEffect(() => {
@@ -82,7 +84,9 @@ function Category() {
               </div>
 
               {/* Add to Cart Button */}
-              <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center space-x-2">
+              <button
+                onClick={addToCart}
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center space-x-2">
                 <ShoppingCart size={18} />
                 <span>Add to Cart</span>
               </button>

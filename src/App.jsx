@@ -17,6 +17,7 @@ import ProductEdit from "./Components/Edit/ProductEdit";
 import OrderEdit from "./Components/Edit/OrderEdit";
 import Profile from "./Components/Profile";
 import AddProduct from "./Components/AddProduct";
+import EditOrder from "./Components/Edit/OrderEdit";
 function App() {
   const [user, setUser] = useState(null);
 
@@ -40,7 +41,7 @@ function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/editproduct/:id" element={<ProductEdit />} />
-        <Route path="/editorder/:id" element={<OrderEdit />} />
+        <Route path="/editorder/:id" element={<EditOrder />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/addproduct" element={<AddProduct/>}/>
 

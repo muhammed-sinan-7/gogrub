@@ -46,7 +46,7 @@ export const UserProvider = ({ children }) => {
     const savedUser = localStorage.getItem("activeUser");
     if (savedUser) {
       const user = JSON.parse(savedUser);
-      // fetch latest user info
+      
       axios
         .get(`https://gogrub-api-mock.onrender.com/users/${user.id}`)
         .then((res) => {
@@ -121,7 +121,7 @@ export const UserProvider = ({ children }) => {
   const addToWishlist = (product) => {
     const exists = state.wishlist.find((item) => item.id === product.id);
     if (exists) return;
-    const updatedWishlist = [...state.wishlist, product];
+    const updatedWishliIst = [...state.wishlist, product];
     dispatch({ type: "SET_WISHLIST", payload: updatedWishlist });
     syncUserData(state.cart, updatedWishlist);
   };

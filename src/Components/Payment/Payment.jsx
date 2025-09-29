@@ -41,11 +41,11 @@ const Payment = () => {
       return;
     }
 
-    // Save address globally so Profile can use it
+    
     localStorage.setItem("deliveryAddress", form.address);
 
     const order = {
-      id: Date.now(),
+      id: String(Date.now()),
       items: productFromBuyNow ? [productFromBuyNow] : cart,
       total: productFromBuyNow
         ? Number(productFromBuyNow.price) * Number(productFromBuyNow.quantity)

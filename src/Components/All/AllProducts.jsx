@@ -12,8 +12,12 @@ function AllProducts() {
   const [error, setError] = useState(null);
   const { state, addToCart, addToWishlist } = useUser();
   const [filtered, setFiltered] = useState([]);
-  const [sortOption, setSortOption] = useState("default"); // 🔹 sorting
-  const [categoryFilter, setCategoryFilter] = useState("all"); // 🔹 filtering
+  const [sortOption, setSortOption] = useState("default");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8; // Number of products per page
 
   const navigate = useNavigate();
 
@@ -24,7 +28,7 @@ function AllProducts() {
         `https://gogrub-api-mock.onrender.com/product`
       );
       setFoods(res.data);
-      setFiltered(res.data); 
+      setFiltered(res.data);
       setError(null);
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -40,15 +44,12 @@ function AllProducts() {
     fetchProducts();
   }, []);
 
-  
   useEffect(() => {
     let updated = [...foods];
 
-    
     if (categoryFilter !== "all") {
       updated = updated.filter((p) => p.category === categoryFilter);
     }
-
 
     if (sortOption === "price-asc") {
       updated.sort((a, b) => (a.price || a.prize) - (b.price || b.prize));
@@ -61,6 +62,7 @@ function AllProducts() {
     }
 
     setFiltered(updated);
+    setCurrentPage(1); // Reset to first page on filter/sort change
   }, [sortOption, categoryFilter, foods]);
 
   const toggleFavorite = (productId) => {
@@ -86,7 +88,12 @@ function AllProducts() {
     addToWishlist(product);
   };
 
- 
+  // 🔹 Pagination calculations
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+
   if (loading)
     return <div className="max-w-7xl mx-auto px-4 py-8 pt-20">Loading...</div>;
   if (error)
@@ -102,7 +109,7 @@ function AllProducts() {
     <div>
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-6 pt-16 sm:pt-20">
-        {/* Header */}
+        {/* Header & Filters */}
         <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
@@ -113,7 +120,6 @@ function AllProducts() {
             </p>
           </div>
 
-          
           <div className="flex flex-wrap gap-3">
             <select
               value={categoryFilter}
@@ -144,7 +150,7 @@ function AllProducts() {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-          {filtered.map((product) => (
+          {currentItems.map((product) => (
             <div
               key={product.id}
               className="bg-white cursor-pointer rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden border border-gray-100"
@@ -217,6 +223,41 @@ function AllProducts() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* 🔹 Pagination Controls */}
+        <div className="flex justify-center mt-8 gap-2">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+          >
+            Prev
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
+            <button
+              key={num}
+              onClick={() => setCurrentPage(num)}
+              className={`px-3 py-1 rounded ${
+                currentPage === num
+                  ? "bg-orange-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              {num}
+            </button>
+          ))}
+
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+          >
+            Next
+          </button>
         </div>
 
         <div className="h-20 sm:h-8"></div>
