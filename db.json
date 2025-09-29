@@ -219,7 +219,7 @@
       "est_time": "18 Minute",
       "description": "A flavorful stir-fry dish made with tender chicken, roasted peanuts, bell peppers, and dried chilies, all tossed in a tangy, spicy soy-based sauce.",
       "price": 329,
-      "img_url": "https://img.freepik.com/free-photo/kung-pao-chicken-vegetable-dish-with-bowl-rice_23-2148137172.jpg"
+      "img_url": "https://img.freepik.com/premium-photo/kung-pao-chicken-holiday-party-delicious-kung-pao-chicken-food_1020697-577060.jpg"
     },
     {
       "id": "12",
@@ -230,7 +230,7 @@
       "est_time": "22 Minute",
       "description": "Crispy fried pork chunks coated in a vibrant sweet and sour sauce, made with pineapples, bell peppers, and a tangy vinegar-based sauce.",
       "price": 369,
-      "img_url": "https://img.freepik.com/free-photo/sweet-and-sour-pork-chopsticks_23-2147882760.jpg"
+      "img_url": "https://img.freepik.com/free-photo/meatballs-sweet-sour-tomato-sauce_2829-19545.jpg"
     },
     {
       "id": "13",
@@ -241,7 +241,7 @@
       "est_time": "15 Minute",
       "description": "A variety of bite-sized Chinese dumplings, buns, and spring rolls, steamed or fried, served with dipping sauces.",
       "price": 249,
-      "img_url": "https://img.freepik.com/free-photo/assorted-dim-sum-dumplings-steamed-buns-dipping-sauce_23-2148832387.jpg"
+      "img_url": "https://img.freepik.com/free-photo/view-delicious-dumplings_23-2150777769.jpg"
     },
     {
       "id": "14",
@@ -252,7 +252,7 @@
       "est_time": "20 Minute",
       "description": "Silken tofu cooked in a spicy, flavorful Sichuan sauce with minced pork, chili oil, and a hint of garlic, served over rice.",
       "price": 289,
-      "img_url": "https://img.freepik.com/free-photo/mapo-tofu-spicy-chinese-dish_23-2150257635.jpg"
+      "img_url": "https://img.freepik.com/free-photo/grilled-beef-cooked-cast-iron-grill-generated-by-ai_188544-20542.jpg"
     },
     {
       "id": "101",
@@ -260,7 +260,7 @@
       "category": "Offer",
       "price": "199",
       "description": "Get 2 cheesy garlic breads + free dip at a special offer price.",
-      "img_url": "https://img.freepik.com/free-photo/garlic-bread-cheese.jpg"
+      "img_url": "https://img.freepik.com/free-photo/homemade-tasty-bread-with-garlic-cheese-herbs-kitchen-table_1150-47008.jpg"
     },
     {
       "id": "102",
@@ -268,7 +268,7 @@
       "category": "Offer",
       "price": "299",
       "description": "Enjoy a full combo meal with burger, fries, and Coke at a discounted price.",
-      "img_url": "https://img.freepik.com/free-photo/burger-fries-combo.jpg"
+      "img_url": "https://img.freepik.com/free-photo/grilled-hamburger-meal-with-fries-cheese-generative-ai_188544-8488.jpg"
     },
     {
       "id": "103",
@@ -276,16 +276,9 @@
       "category": "Offer",
       "price": "699",
       "description": "2 large pizzas + 1 garlic bread + 2 soft drinks — perfect for family dining.",
-      "img_url": "https://img.freepik.com/free-photo/family-pizza-pack.jpg"
+      "img_url": "https://img.freepik.com/free-photo/delicious-pizza-studio_23-2151846558.jpg"
     },
-    {
-      "id": "104",
-      "name": "Sweet Tooth Deal",
-      "category": "Offer",
-      "price": "149",
-      "description": "Buy 1 dessert, get the 2nd at 50% off.",
-      "img_url": "https://img.freepik.com/free-photo/chocolate-desserts.jpg"
-    },
+   
     {
       "id": "105",
       "name": "Spicy Fiesta Taco Combo",

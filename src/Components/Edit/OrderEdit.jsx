@@ -51,18 +51,18 @@ const EditOrder = () => {
     if (!userId || !order) return;
 
     try {
-      // Get user data
+      
       const res = await axios.get(
         `https://gogrub-api-mock.onrender.com/users/${userId}`
       );
       const user = res.data;
 
-      // Update the order status
+     
       const updatedOrders = user.orders.map((o) =>
         o.id === order.id ? { ...o, status } : o
       );
 
-      // Patch the user with updated orders
+    
       await axios.patch(
         `https://gogrub-api-mock.onrender.com/users/${userId}`,
         {
@@ -71,7 +71,7 @@ const EditOrder = () => {
       );
 
       alert("Order status updated successfully!");
-      navigate("/adminpanel"); // redirect back to admin panel
+      navigate("/admin"); 
     } catch (error) {
       console.error("Error updating order:", error);
       alert("Failed to update order");
@@ -85,7 +85,7 @@ const EditOrder = () => {
       <h2 className="text-2xl font-bold mb-6">Edit Order - {order.id}</h2>
 
       <div className="mb-4">
-        <p className="text-gray-700 mb-2">Customer: {order.customer}</p>
+        
         <p className="text-gray-700 mb-2">
           Product: {order.items.map((i) => i.name).join(", ")}
         </p>
