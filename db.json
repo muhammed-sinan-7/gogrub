@@ -266,7 +266,7 @@
       "id": "102",
       "name": "Burger + Fries + Coke",
       "category": "Offer",
-      "price": "299",
+      "price": "199",
       "description": "Enjoy a full combo meal with burger, fries, and Coke at a discounted price.",
       "img_url": "https://img.freepik.com/free-photo/grilled-hamburger-meal-with-fries-cheese-generative-ai_188544-8488.jpg"
     },
@@ -274,7 +274,7 @@
       "id": "103",
       "name": "Family Pizza Pack",
       "category": "Offer",
-      "price": "699",
+      "price": "399",
       "description": "2 large pizzas + 1 garlic bread + 2 soft drinks — perfect for family dining.",
       "img_url": "https://img.freepik.com/free-photo/delicious-pizza-studio_23-2151846558.jpg"
     },
@@ -282,7 +282,7 @@
       "id": "111",
       "name": "Burger Combo Feast",
       "category": "Offer",
-      "price": "299",
+      "price": "189",
       "description": "Cheese burger + fries + cold drink at a combo price.",
       "img_url": "https://img.freepik.com/free-photo/delicious-burger-fries-combo.jpg"
     },
@@ -290,7 +290,7 @@
       "id": "112",
       "name": "Grilled Chicken Meal",
       "category": "Offer",
-      "price": "349",
+      "price": "249",
       "description": "Juicy grilled chicken with rice and salad at a special price.",
       "img_url": "https://img.freepik.com/free-photo/grilled-chicken-breasts-with-vegetables_23-2148189821.jpg"
     },
@@ -298,7 +298,7 @@
       "id": "113",
       "name": "Vegetarian Thali Offer",
       "category": "Offer",
-      "price": "249",
+      "price": "199",
       "description": "Traditional Indian thali with chapati, curry, rice, and dessert.",
       "img_url": "https://img.freepik.com/free-photo/delicious-food-table_23-2150857814.jpg"
     },
@@ -306,7 +306,7 @@
       "id": "114",
       "name": "Shawarma Wrap Deal",
       "category": "Offer",
-      "price": "199",
+      "price": "130",
       "description": "2 chicken shawarma wraps with a soft drink included.",
       "img_url": "https://img.freepik.com/free-photo/view-delicious-shawarma-dish_23-2151805406.jpg"
     },
@@ -314,7 +314,7 @@
       "id": "115",
       "name": "Ice Cream Sundae Treat",
       "category": "Offer",
-      "price": "149",
+      "price": "90",
       "description": "Buy 1 sundae and get 1 free. Perfect for dessert lovers.",
       "img_url": "https://img.freepik.com/free-photo/bowl-banana-split-ice-cream-with-banana-split-bananas-top_188544-32639.jpg"
     },
@@ -322,7 +322,7 @@
       "id": "116",
       "name": "Biryani Family Pack",
       "category": "Offer",
-      "price": "599",
+      "price": "499",
       "description": "Family-sized chicken biryani with raita and salad.",
       "img_url": "https://img.freepik.com/free-photo/gourmet-chicken-biryani-with-steamed-basmati-rice-generated-by-ai_188544-13480.jpg"
     }
