@@ -278,55 +278,53 @@
       "description": "2 large pizzas + 1 garlic bread + 2 soft drinks — perfect for family dining.",
       "img_url": "https://img.freepik.com/free-photo/delicious-pizza-studio_23-2151846558.jpg"
     },
-   
     {
-      "id": "105",
-      "name": "Spicy Fiesta Taco Combo",
+      "id": "111",
+      "name": "Burger Combo Feast",
       "category": "Offer",
-      "price": "249",
-      "description": "2 tacos + nachos + soft drink at a special price.",
-      "img_url": "https://img.freepik.com/free-photo/spicy-taco-combo.jpg"
+      "price": "299",
+      "description": "Cheese burger + fries + cold drink at a combo price.",
+      "img_url": "https://img.freepik.com/free-photo/delicious-burger-fries-combo.jpg"
     },
     {
-      "id": "106",
-      "name": "Pasta Delight Offer",
-      "category": "Offer",
-      "price": "279",
-      "description": "Creamy pasta with garlic bread included, limited time offer.",
-      "img_url": "https://img.freepik.com/free-photo/creamy-pasta-dish.jpg"
-    },
-    {
-      "id": "107",
-      "name": "Seafood Platter Offer",
-      "category": "Offer",
-      "price": "599",
-      "description": "Get a platter of prawns, fish, and calamari at a discounted price.",
-      "img_url": "https://img.freepik.com/free-photo/seafood-platter.jpg"
-    },
-    {
-      "id": "108",
-      "name": "Breakfast Special Combo",
-      "category": "Offer",
-      "price": "199",
-      "description": "Pancakes + omelette + coffee at a morning special price.",
-      "img_url": "https://img.freepik.com/free-photo/breakfast-combo.jpg"
-    },
-    {
-      "id": "109",
-      "name": "Sushi Lover’s Deal",
+      "id": "112",
+      "name": "Grilled Chicken Meal",
       "category": "Offer",
       "price": "349",
-      "description": "Get a mix of sushi rolls at a special offer price.",
-      "img_url": "https://img.freepik.com/free-photo/sushi-rolls.jpg"
+      "description": "Juicy grilled chicken with rice and salad at a special price.",
+      "img_url": "https://img.freepik.com/free-photo/grilled-chicken-rice-salad.jpg"
     },
     {
-      "id": "110",
-      "name": "Pizza + Dessert Combo",
+      "id": "113",
+      "name": "Vegetarian Thali Offer",
       "category": "Offer",
-      "price": "399",
-      "description": "Medium pizza with a dessert included at a discounted rate.",
-      "img_url": "https://img.freepik.com/free-photo/pizza-dessert-combo.jpg"
+      "price": "249",
+      "description": "Traditional Indian thali with chapati, curry, rice, and dessert.",
+      "img_url": "https://img.freepik.com/free-photo/indian-vegetarian-thali.jpg"
+    },
+    {
+      "id": "114",
+      "name": "Shawarma Wrap Deal",
+      "category": "Offer",
+      "price": "199",
+      "description": "2 chicken shawarma wraps with a soft drink included.",
+      "img_url": "https://img.freepik.com/free-photo/chicken-shawarma-wraps.jpg"
+    },
+    {
+      "id": "115",
+      "name": "Ice Cream Sundae Treat",
+      "category": "Offer",
+      "price": "149",
+      "description": "Buy 1 sundae and get 1 free. Perfect for dessert lovers.",
+      "img_url": "https://img.freepik.com/free-photo/ice-cream-sundae.jpg"
+    },
+    {
+      "id": "116",
+      "name": "Biryani Family Pack",
+      "category": "Offer",
+      "price": "599",
+      "description": "Family-sized chicken biryani with raita and salad.",
+      "img_url": "https://img.freepik.com/free-photo/chicken-biryani-family-pack.jpg"
     }
-  
   ]
 }
