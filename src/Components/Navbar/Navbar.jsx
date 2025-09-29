@@ -111,22 +111,34 @@ function Navbar({ onOffersClick }) {
               />
 
               {searchQuery && searched.length > 0 && (
-                <ul className="absolute left-0 right-0 bg-white border rounded-lg shadow-md mt-1 z-20 max-h-60 overflow-y-auto">
-                  {searched.map((item) => (
+                <ul className="absolute left-0 right-0 bg-white border border-gray-200 rounded-xl shadow-lg mt-2 z-20 max-h-72 overflow-y-auto animate-fadeIn">
+                  {searched.map((item, index) => (
                     <li
                       key={item.id}
                       onClick={() => {
                         setSearchQuery("");
                         navigate(`/product/${item.id}`);
                       }}
-                      className="px-4 py-2 flex items-center gap-5 cursor-pointer hover:bg-orange-100"
+                      className="px-4 py-3 flex items-center gap-4 cursor-pointer 
+                   hover:bg-orange-50 transition-all duration-200"
                     >
                       <img
-                        className="w-10 rounded-ful"
+                        className="w-12 h-12 object-cover rounded-lg shadow-sm border border-gray-200"
                         src={item.img_url}
-                        alt=""
+                        alt={item.name}
+                        onError={(e) => {
+                          e.target.src =
+                            "https://via.placeholder.com/100x100/f3f4f6/9ca3af?text=No+Image";
+                        }}
                       />
-                      {item.name}
+                      <div className="flex flex-col">
+                        <span className="font-medium text-gray-900 truncate">
+                          {item.name}
+                        </span>
+                        <span className="text-sm text-gray-500">
+                          {item.category || "Food"}
+                        </span>
+                      </div>
                     </li>
                   ))}
                 </ul>

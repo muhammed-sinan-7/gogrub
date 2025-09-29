@@ -15,9 +15,8 @@ function AllProducts() {
   const [sortOption, setSortOption] = useState("default");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
-  
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8; // Number of products per page
+  const itemsPerPage = 8;
 
   const navigate = useNavigate();
 
@@ -62,7 +61,7 @@ function AllProducts() {
     }
 
     setFiltered(updated);
-    setCurrentPage(1); // Reset to first page on filter/sort change
+    setCurrentPage(1);
   }, [sortOption, categoryFilter, foods]);
 
   const toggleFavorite = (productId) => {
@@ -88,16 +87,23 @@ function AllProducts() {
     addToWishlist(product);
   };
 
-  // 🔹 Pagination calculations
+  // 🔹 Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filtered.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
+  // 🔹 Loading Spinner
   if (loading)
-    return <div className="max-w-7xl mx-auto px-4 py-8 pt-20">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="w-12 h-12 border-4 border-orange-500 border-dashed rounded-full animate-spin"></div>
+      </div>
+    );
+
   if (error)
     return <div className="max-w-7xl mx-auto px-4 py-8 pt-20">{error}</div>;
+
   if (foods.length === 0)
     return (
       <div className="max-w-7xl mx-auto px-4 py-8 pt-20">
@@ -120,31 +126,96 @@ function AllProducts() {
             </p>
           </div>
 
+          {/* 🔹 Modern Dropdowns */}
           <div className="flex flex-wrap gap-3">
-            <select
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            >
-              <option value="all">All Categories</option>
-              {[...new Set(foods.map((f) => f.category))].map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+            {/* Category Filter */}
+            <div className="relative">
+              <select
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="appearance-none pl-10 pr-8 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 shadow-sm focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all"
+              >
+                <option value="all">All Categories</option>
+                {[...new Set(foods.map((f) => f.category))].map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              {/* Left Icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 4a1 1 0 011-1h2a1 1 0 011 1v0a1 1 0 01-1 1H4a1 1 0 01-1-1v0zM3 12a1 1 0 011-1h10a1 1 0 011 1v0a1 1 0 01-1 1H4a1 1 0 01-1-1v0zM3 20a1 1 0 011-1h6a1 1 0 011 1v0a1 1 0 01-1 1H4a1 1 0 01-1-1v0z"
+                />
+              </svg>
+              {/* Arrow */}
+              <svg
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
 
-            <select
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
-            >
-              <option value="default">Sort By</option>
-              <option value="price-asc">Price: Low → High</option>
-              <option value="price-desc">Price: High → Low</option>
-              <option value="name-asc">Name: A → Z</option>
-              <option value="name-desc">Name: Z → A</option>
-            </select>
+            {/* Sort Dropdown */}
+            <div className="relative">
+              <select
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+                className="appearance-none pl-10 pr-8 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 shadow-sm focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all"
+              >
+                <option value="default">Sort By</option>
+                <option value="price-asc">Price: Low → High</option>
+                <option value="price-desc">Price: High → Low</option>
+                <option value="name-asc">Name: A → Z</option>
+                <option value="name-desc">Name: Z → A</option>
+              </select>
+              {/* Left Icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6v12m6-6H6"
+                />
+              </svg>
+              {/* Arrow */}
+              <svg
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -225,7 +296,7 @@ function AllProducts() {
           ))}
         </div>
 
-        {/* 🔹 Pagination Controls */}
+        {/* Pagination */}
         <div className="flex justify-center mt-8 gap-2">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

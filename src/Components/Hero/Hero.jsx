@@ -1,64 +1,63 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"; // ✅ Import Framer Motion
 
 function Hero() {
+  const navigate = useNavigate();
 
-  const navigate= useNavigate()
   return (
-    <div>
-       <div className="relative  px-6 pt-14 lg:px-8">
-      
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-      >
-        <div
-          className="relative left-[calc(50%-14rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-gradient-to-tr from-[#F25D00] to-[F57B00] opacity-70 sm:left-[calc(50%-30rem)] sm:w-288.75"
-        ></div>
-      </div>
+    <div
+      className="relative bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage:
+          "url('https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141353.jpg')", // ✅ Food background image
+      }}
+    >
+      {/* Overlay for better text visibility */}
+      <div className="absolute inset-0 bg-black/50"></div>
 
-      
-      <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-       
-        <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-          
-        </div>
+      <div className="relative px-6 pt-14 lg:px-8">
+        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 text-center text-white">
+          {/* Fade-up Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-5xl font-semibold tracking-tight text-balance sm:text-7xl"
+          >
+            Feed Your Cravings, Fuel Your Soul
+          </motion.h1>
 
         
-        <div className="text-center">
-          <h1 className="text-5xl font-semibold tracking-tight text-balance text-amber-600 sm:text-7xl">
-            Feed Your Cravings, Fuel Your Soul
-          </h1>
-          <p className="mt-8 text-lg font-medium text-pretty text-gray-600 sm:text-xl/8">
-            From quick bites to full meals, we’ve got the flavors you crave, the freshness you deserve, and the joy that comes with every single bite.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+            className="mt-8 text-lg font-medium text-pretty sm:text-xl/8"
+          >
+            From quick bites to full meals, we’ve got the flavors you crave, the
+            freshness you deserve, and the joy that comes with every single
+            bite.
+          </motion.p>
 
-          
-          <div className="mt-10 flex items-center justify-center gap-x-6">
+          {/* Fade-up Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.3, ease: "easeOut", delay: 0.6 }}
+            className="mt-10 flex items-center justify-center gap-x-6"
+          >
             <button
-              href="#"
-              onClick={()=> navigate('/products')}
-              className="rounded-md bg-amber-600 cursor-pointer px-3.5 py-2.5 text-xl font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              onClick={() => navigate("/products")}
+              className="rounded-md bg-amber-600 cursor-pointer px-3.5 py-2.5 text-xl font-semibold text-white shadow-xs hover:bg-amber-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500"
             >
-             Take Menu
+              Take Menu
             </button>
-            
-          </div>
+          </motion.div>
         </div>
       </div>
-
-      {/* Bottom gradient background */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-      >
-      </div>
-
-      
     </div>
-
-    </div>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

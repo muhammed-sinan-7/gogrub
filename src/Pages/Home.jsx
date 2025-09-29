@@ -8,6 +8,7 @@ import Footer from '../Components/Footer/Footer';
 import Navbar from '../Components/Navbar/Navbar';
 import Offer from '../Components/Offer/Offer'
 import { useRef } from 'react';
+import About from '../Components/About/About';
 function Home() {
 
  const offerRef = useRef(null); // ref to Offer section
@@ -25,6 +26,7 @@ function Home() {
       <SpecialFoods />
       <Chinese />
       <Offer  ref={offerRef}/>
+      <About/>
       <Footer />
     </div>
 
