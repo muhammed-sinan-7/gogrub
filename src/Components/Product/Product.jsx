@@ -16,6 +16,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useUser } from "../../Context/UserContext";
 import Navbar from "../Navbar/Navbar";
+import api from "../../api/axios";
+import toast from "react-hot-toast";
 
 function Product() {
   const { id } = useParams();
@@ -27,7 +29,7 @@ function Product() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
-  const { state, addToCart } = useUser();
+  const { state, addToCart,addToWishlist } = useUser();
 
   useEffect(() => {
     setTimeout(() => {
@@ -41,9 +43,8 @@ function Product() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        let res = await axios.get(
-          `https://gogrub-api-mock.onrender.com/product/${id}`
-        );
+        const url = `/products/${id}/`;
+        const res = await api.get(url);
         console.log(res.data);
         setDatas(res.data);
         setError(null);
@@ -66,36 +67,36 @@ function Product() {
     }
   };
 
-  const handleAddToCart = (e) => {
+  const handleAddToCart = (product, e, quantity) => {
     e.stopPropagation();
-
-    if (!state?.user) {
+    const access = localStorage.getItem("access");
+    if (!access) {
       navigate("/signup");
       return;
     }
 
-    addToCart({ ...datas, quantity });
+    addToCart(product, quantity);
     setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 2000); // auto-hide popup
+    setTimeout(() => setShowPopup(false), 2000);
   };
 
   const handleBuyNow = () => {
-    if (!state?.user) {
-      // If user is not logged in, redirect them to signup/login
+    const access = localStorage.getItem("access");
+    if (!access) {
       navigate("/signup");
       return;
     }
 
-    // Take product with correct quantity (from state)
+    // Prepare product data for payment page
     const productToBuy = {
       id: datas.id,
       name: datas.name,
-      price: datas.price || datas.prize, // ensure consistency
-      quantity: quantity, 
-      img_url: datas.img_url,
+      price: datas.price || datas.prize,
+      quantity: quantity,
+      image: datas.image,
+      product_image: datas.image, // For Payment.jsx compatibility
     };
 
-    // Pass product through location state to payment page
     navigate("/payment", {
       state: { product: productToBuy },
     });
@@ -133,7 +134,6 @@ function Product() {
     return (
       <div>
         <Navbar />
-
         <section className="min-h-screen bg-gray-50 py-8 pt-20 flex items-center justify-center">
           <div className="text-center">
             <div className="text-6xl mb-4">😞</div>
@@ -182,7 +182,7 @@ function Product() {
               <div className="relative group">
                 <img
                   className="w-full h-64 sm:h-80 lg:h-96 xl:h-[500px] object-cover rounded-2xl shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]"
-                  src={datas.img_url}
+                  src={datas.image}
                   alt={datas.name}
                   onError={(e) => {
                     e.target.src =
@@ -190,7 +190,10 @@ function Product() {
                   }}
                 />
                 <button
-                  onClick={() => setIsFavorite(!isFavorite)}
+                  onClick={() => {
+                    addToWishlist(datas);
+                    toast.success(`${datas.name} added to wishlist!`);
+                  }}
                   className="absolute top-4 left-4 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110"
                 >
                   <Heart
@@ -218,28 +221,16 @@ function Product() {
               {/* Price */}
               <div className="flex items-center space-x-4">
                 <span className="text-3xl sm:text-4xl font-bold text-gray-900">
-                  ₹{datas.prize || datas.price}
+                  ₹{typeof datas.price === "string" ? datas.price : datas.price}
                 </span>
               </div>
 
               {/* Delivery Info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-xl">
                 <div className="flex items-center space-x-3">
-                  <Clock className="h-5 w-5 text-orange-500" />
-                  <div>
-                    <p className="font-semibold text-gray-900">Delivery Time</p>
-                    <p className="text-sm text-gray-600">
-                      {datas.est_time || "30-45 mins"}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
                   <Truck className="h-5 w-5 text-green-500" />
                   <div>
                     <p className="font-semibold text-gray-900">Free Delivery</p>
-                    <p className="text-sm text-gray-600">
-                      On orders above ₹299
-                    </p>
                   </div>
                 </div>
               </div>
@@ -259,14 +250,16 @@ function Product() {
               <div className="flex items-center space-x-4">
                 <button
                   onClick={() => handleQuantityChange("decrease")}
-                  className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100"
+                  className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
-                <span className="text-lg font-medium">{quantity}</span>
+                <span className="text-lg font-medium min-w-[40px] text-center">
+                  {quantity}
+                </span>
                 <button
                   onClick={() => handleQuantityChange("increase")}
-                  className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100"
+                  className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors"
                 >
                   <Plus className="h-4 w-4" />
                 </button>
@@ -275,7 +268,7 @@ function Product() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
                 <button
-                  onClick={handleAddToCart}
+                  onClick={(e) => handleAddToCart(datas, e, quantity)}
                   className="flex-1 bg-white border-2 border-orange-500 text-orange-500 hover:bg-orange-50 py-3 sm:py-4 px-6 rounded-xl font-semibold text-base transition-all duration-200 flex items-center justify-center space-x-2 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <ShoppingCart className="h-5 w-5" />
@@ -287,7 +280,7 @@ function Product() {
                   className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white py-3 sm:py-4 px-6 rounded-xl font-semibold text-base transition-all duration-200 flex items-center justify-center space-x-2 hover:scale-[1.02] active:scale-[0.98] shadow-lg"
                 >
                   <ShoppingBag className="h-5 w-5" />
-                  <span>Buy Now</span>
+                  <span>Order Now</span>
                 </button>
               </div>
 

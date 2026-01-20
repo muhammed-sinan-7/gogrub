@@ -1,38 +1,54 @@
 // UserContext.js
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import axios from "axios";
-
+import api from "../api/axios";
+import { Beaker } from "lucide-react";
+import { ENDPOINTS } from "../api/endpoints";
 const UserContext = createContext();
 
 const initialState = {
   user: null,
   cart: [],
   wishlist: [],
+  loading: true,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "SET_USER":
       if (!action.payload) {
-        // logout or clear
-        return { ...state, user: null, cart: [], wishlist: [] };
+        return {
+          ...state,
+          user: null,
+          cart: [],
+          wishlist: [],
+        };
       }
+
       return {
         ...state,
-        user: action.payload, // ✅ FIX: store actual user
-        cart: Array.isArray(action.payload.cart)
-          ? action.payload.cart
-          : state.cart,
-        wishlist: Array.isArray(action.payload.wishlist)
-          ? action.payload.wishlist
-          : state.wishlist,
+        user: action.payload,
       };
 
     case "SET_CART":
-      return { ...state, cart: action.payload };
+      return {
+        ...state,
+        cart: action.payload,
+      };
 
     case "SET_WISHLIST":
-      return { ...state, wishlist: action.payload };
+      return {
+        ...state,
+        wishlist: Array.isArray(action.payload) ? action.payload : [],
+      };
+    case "SET_LOADING":
+      return { ...state, loading: action.payload };
 
     default:
       return state;
@@ -41,31 +57,74 @@ const reducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  // const [cart,setCart] = useState([])
+
+  const loadCart = async () => {
+    try {
+      const res = await api.get(ENDPOINTS.CART);
+
+      const items = res.data.cart?.items || [];
+
+      dispatch({
+        type: "SET_CART",
+        payload: items,
+      });
+
+      return items;
+    } catch (error) {
+      dispatch({ type: "SET_CART", payload: [] });
+      return [];
+    }
+  };
+
+  const loadWishlist = async () => {
+    try {
+      const res = await api.get(ENDPOINTS.WISHLIST);
+      const items = Array.isArray(res.data) ? res.data : [];
+
+      dispatch({
+        type: "SET_WISHLIST",
+        payload: items,
+      });
+
+      return items;
+    } catch (error) {
+      dispatch({ type: "SET_WISHLIST", payload: [] });
+      return [];
+    }
+  };
+  const hydrateUserData = async () => {
+    dispatch({ type: "SET_LOADING", payload: true });
+
+    await Promise.all([loadCart(), loadWishlist()]);
+
+    dispatch({ type: "SET_LOADING", payload: false });
+  };
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("activeUser");
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      
-      axios
-        .get(`https://gogrub-api-mock.onrender.com/users/${user.id}`)
-        .then((res) => {
-          dispatch({ type: "SET_USER", payload: res.data });
-        })
-        .catch(() => {
-          dispatch({ type: "SET_USER", payload: null });
-        });
+    const access = localStorage.getItem("access");
+
+    if (access) {
+      hydrateUserData();
+    } else {
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   }, []);
 
-  const login = (userData) => {
-    dispatch({ type: "SET_USER", payload: userData });
-    localStorage.setItem("activeUser", JSON.stringify(userData));
+  const login = async (JWTResponse) => {
+    const { access, refresh, user } = JWTResponse;
+    localStorage.setItem("access", access);
+    localStorage.setItem("refresh", refresh);
+
+    dispatch({ type: "SET_USER", payload: user });
+    await hydrateUserData();
+    // localStorage.setItem("activeUser", JSON.stringify(userData));
   };
 
   const logout = () => {
     dispatch({ type: "SET_USER", payload: null });
-    localStorage.removeItem("activeUser");
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
   };
 
   const syncUserData = async (cart, wishlist) => {
@@ -76,61 +135,111 @@ export const UserProvider = ({ children }) => {
         updatedUser
       );
       localStorage.setItem("activeUser", JSON.stringify(updatedUser));
-      dispatch({ type: "SET_USER", payload: updatedUser }); // ✅ keep everything in sync
+      dispatch({ type: "SET_USER", payload: updatedUser });
     }
   };
 
-  const addToCart = (product) => {
-    const existing = state.cart.find((item) => item.id === product.id);
-    let updatedCart;
-
-    if (existing) {
-      updatedCart = state.cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-    } else {
-      updatedCart = [
-        ...state.cart,
-        { ...product, quantity: product.quantity || 1 },
-      ];
+  const addToCart = async (product, quantity) => {
+    try {
+      const res = await api.post(ENDPOINTS.CART, {
+        product_id: product.id,
+        quantity: quantity,
+      });
+      const fullCart = await api.get(ENDPOINTS.CART);
+      dispatch({ type: "SET_CART", payload: fullCart.data.cart.items });
+      syncUserData(fullCart.data.cart.items, state.wishlist);
+    } catch (error) {
+      console.error("Add failed:", error.response?.data || error.message);
     }
-
-    dispatch({ type: "SET_CART", payload: updatedCart });
-    syncUserData(updatedCart, state.wishlist);
   };
 
-  const updateQuantity = (id, type) => {
-    const updatedCart = state.cart.map((item) => {
-      if (item.id === id) {
-        const newQty =
-          type === "inc" ? item.quantity + 1 : Math.max(item.quantity - 1, 1);
-        return { ...item, quantity: newQty };
-      }
-      return item;
+  const updateQuantity = async (item, type) => {
+    console.log(item.id);
+    const newQty =
+      type === "inc" ? item.quantity + 1 : Math.max(1, item.quantity - 1);
+
+    const updatedCart = state.cart.map((cartItem) =>
+      cartItem.id === item.id ? { ...cartItem, quantity: newQty } : cartItem
+    );
+
+    dispatch({
+      type: "SET_CART",
+      payload: updatedCart,
     });
-    dispatch({ type: "SET_CART", payload: updatedCart });
-    syncUserData(updatedCart, state.wishlist);
+
+    try {
+      await api.put(ENDPOINTS.QUANTITY, {
+        cart_item_id: item.id,
+        quantity: newQty,
+      });
+    } catch (error) {
+      console.error("Quantity update failed", error);
+      loadCart();
+    }
   };
 
-  const removeFromCart = (id) => {
-    const updatedCart = state.cart.filter((item) => item.id !== id);
-    dispatch({ type: "SET_CART", payload: updatedCart });
-    syncUserData(updatedCart, state.wishlist);
+  const removeFromCart = async (item) => {  
+    const updatedCart = state.cart.filter(
+      (cartItem) => cartItem.id !== item.id
+    );
+
+    dispatch({
+      type: "SET_CART",
+      payload: updatedCart,
+    });
+
+    try {
+      await api.delete(ENDPOINTS.DELETE_CART, {
+        data: { cart_item_id: item.id },
+      });
+    } catch (error) {
+      console.error("Delete failed", error);
+      loadCart();
+    }
   };
 
-  const addToWishlist = (product) => {
-    const exists = state.wishlist.find((item) => item.id === product.id);
-    if (exists) return;
-    const updatedWishliIst = [...state.wishlist, product];
-    dispatch({ type: "SET_WISHLIST", payload: updatedWishlist });
-    syncUserData(state.cart, updatedWishlist);
+  const addToWishlist = async (product) => {
+    try {
+      let res = await api.post(ENDPOINTS.WISHLIST, {
+        product_id: product.id,
+      });
+      const fullWishlist = await api.get(ENDPOINTS.WISHLIST);
+
+      dispatch({
+        type: "SET_WISHLIST",
+        payload: Array.isArray(fullWishlist.data) ? fullWishlist.data : [],
+      });
+    } catch (error) {
+      console.error("Add Wishlist Failed ", error);
+    }
   };
 
-  const removeFromWishlist = (id) => {
-    const updatedWishlist = state.wishlist.filter((item) => item.id !== id);
-    dispatch({ type: "SET_WISHLIST", payload: updatedWishlist });
-    syncUserData(state.cart, updatedWishlist);
+  const removeFromWishlist = async (product) => {
+    try {
+      await api.delete(ENDPOINTS.DEL_WISHLIST, {
+        data: { item_id: product.id },
+      });
+    } catch (error) {
+      console.error("Not removed");
+    }
+    let res = await api.get(ENDPOINTS.WISHLIST);
+    dispatch({ type: "SET_WISHLIST", payload: res.data });
   };
+
+  const clearCart =async ()=>{
+    try{
+
+      const res = await api.post(ENDPOINTS.CLEAR_CART)
+      const emptyItems = res.data.cart?.items || [];
+      dispatch({type:"SET_CART", payload:emptyItems})
+      syncUserData(emptyItems, state.wishlist);
+      return true
+    }catch(error){
+
+      console.error(error)
+    }
+
+  }
 
   return (
     <UserContext.Provider
@@ -139,7 +248,9 @@ export const UserProvider = ({ children }) => {
         dispatch,
         login,
         logout,
+        // cart,
         addToCart,
+        clearCart,
         updateQuantity,
         removeFromCart,
         addToWishlist,
