@@ -27,6 +27,9 @@ function Login() {
       });
 
       login(response.data);
+      if (!response.data.user?.is_active){
+        toast.error("User Blocked. Contact Admin")
+      }
       response.data.user?.is_staff
         ? navigate("/admin")
         : navigate("/");
@@ -53,6 +56,7 @@ function Login() {
       }
 
       setErrors(formattedErrors);
+      
       toast.error("Login Failed");
     } finally {
       setLoading(false);
@@ -66,6 +70,7 @@ function Login() {
       });
 
       login(res.data);
+      
       res.data.user?.is_staff
         ? navigate("/admin")
         : navigate("/");

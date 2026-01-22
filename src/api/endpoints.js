@@ -23,6 +23,7 @@ export const ENDPOINTS = {
   FORGOT_PASSWORD: 'auth/password_reset/',
   CONFIRM_PASSWORD:'auth/password_reset_confirm/',
   ADMIN_PRODUCTS:'admin/products/',
+  CATEGORIES:'admin/categories/',
   ADMIN_USERS:'admin/users/',
   ADMIN_ORDERS:'admin/orders/',
   ADMIN_SINGLE_PRODUCT:'admin/${id}/'

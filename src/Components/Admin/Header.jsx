@@ -1,14 +1,9 @@
 import { Search, Bell } from "lucide-react";
-
+import { forceLogout } from "../../api/axios";
 const Header = () => (
   <header className="h-20 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-10">
     <div className="relative w-96">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-      <input 
-        type="text" 
-        placeholder="Search everything..." 
-        className="w-full bg-slate-50 border-none rounded-xl py-2.5 pl-10 text-sm focus:ring-2 focus:ring-indigo-500/10"
-      />
+      
     </div>
     <div className="flex items-center gap-4">
       <div className="p-2 text-slate-500 hover:bg-slate-50 rounded-xl relative cursor-pointer">
@@ -17,6 +12,7 @@ const Header = () => (
       </div>
       <div className="flex items-center gap-3 ml-4">
         <div className="text-right">
+          <button onClick={()=> forceLogout()}>LogOut</button>
           <p className="text-sm font-bold text-slate-900 leading-none">Admin</p>
           <p className="text-[10px] text-slate-400 uppercase font-bold mt-1 tracking-wider">Manager</p>
         </div>
