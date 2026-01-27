@@ -12,13 +12,11 @@ import {
   Truck,
   CheckCircle,
   Smartphone,
-  ArrowRight,
   Building2,
   ShoppingBag,
 } from "lucide-react";
 
-// ✅ FIX: Define the Input component OUTSIDE the main component
-// This prevents the "lose focus after one character" bug.
+/* ===================== INPUT COMPONENT (UNCHANGED) ===================== */
 const Input = ({
   label,
   value,
@@ -54,21 +52,19 @@ const Input = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`
-          w-full h-14 pl-12 pr-4 rounded-2xl text-sm font-medium
-          border-2 focus:border-orange-400 focus:ring-4 focus:ring-orange-100/50
-          transition-all duration-200 bg-white
-          ${
-            error
-              ? "border-red-300 shadow-red-100/50 bg-red-50/30"
-              : "border-gray-200 hover:border-gray-300 shadow-sm"
-          }
-        `}
+        className={`w-full h-14 pl-12 pr-4 rounded-2xl text-sm font-medium
+        border-2 focus:border-orange-400 focus:ring-4 focus:ring-orange-100/50
+        transition-all duration-200 bg-white ${
+          error
+            ? "border-red-300 shadow-red-100/50 bg-red-50/30"
+            : "border-gray-200 hover:border-gray-300 shadow-sm"
+        }`}
       />
     </div>
   </div>
 );
 
+/* ===================== MAIN COMPONENT ===================== */
 const Payment = () => {
   const { state: contextState, clearCart } = useUser();
   const { cart, user } = contextState;
@@ -89,25 +85,24 @@ const Payment = () => {
 
   const productFromBuyNow = locationState?.product || null;
   const orderItems = productFromBuyNow ? [productFromBuyNow] : cart;
+
   const subtotal = orderItems.reduce(
     (sum, item) => sum + Number(item.price) * Number(item.quantity || 1),
     0
   );
+
   const total = subtotal;
 
+  /* ===================== LOAD RAZORPAY ===================== */
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-    return () => {
-      const existing = document.querySelector(
-        'script[src="https://checkout.razorpay.com/v1/checkout.js"]'
-      );
-      if (existing) existing.remove();
-    };
+    return () => script.remove();
   }, []);
 
+  /* ===================== VALIDATION ===================== */
   const validateRequired = () => {
     const newErrors = {};
     if (!fullName.trim()) newErrors.fullName = "Name required";
@@ -119,13 +114,14 @@ const Payment = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  /* ===================== PLACE ORDER ===================== */
   const handlePlaceOrder = async () => {
     if (!validateRequired()) return;
     setLoading(true);
     setErrors({});
 
     try {
-      const orderData = {
+      const payload = {
         mode: productFromBuyNow ? "buy_now" : "cart",
         payment_method: method,
         address: {
@@ -138,69 +134,70 @@ const Payment = () => {
       };
 
       if (productFromBuyNow) {
-        orderData.product_id = productFromBuyNow.id;
-        orderData.quantity = productFromBuyNow.quantity;
+        payload.product_id = productFromBuyNow.id;
+        payload.quantity = productFromBuyNow.quantity;
       }
 
-      const response = await api.post("/orders/create/", orderData);
+      /* ===== ORDER IS CREATED HERE (SOURCE OF TRUTH) ===== */
+      const res = await api.post("/orders/create/", payload);
+      const backendOrderId = res.data.order_id;
 
-      if (response.data.errors) {
-        setErrors(response.data.errors);
-        setLoading(false);
-        return;
-      }
-
-      if (response.data.cod) {
-        if (!productFromBuyNow) {
-          await clearCart();
-        }
+      /* ===== CASH ON DELIVERY ===== */
+      if (method === "cod") {
+        if (!productFromBuyNow) await clearCart();
         setSuccess(true);
         return;
       }
 
+      /* ===== RAZORPAY ===== */
       const options = {
-        key: response.data.razorpay_key,
-        amount: response.data.amount,
-        currency: response.data.currency,
-        name: response.data.name || "Your Store",
-        order_id: response.data.razorpay_order_id,
+        key: res.data.razorpay_key,
+        amount: res.data.amount,
+        currency: res.data.currency,
+        name: res.data.name || "Your Store",
+        order_id: res.data.razorpay_order_id,
         prefill: {
           name: fullName,
           contact: phone,
           email: user?.email || "",
         },
         theme: { color: "#F97316" },
-        handler: async (razorpayResponse) => {
+
+        handler: async (rzp) => {
           try {
             await api.post("/orders/verify-payment/", {
-              order_id: response.data.order_id,
-              razorpay_payment_id: razorpayResponse.razorpay_payment_id,
-              razorpay_order_id: razorpayResponse.razorpay_order_id,
-              razorpay_signature: razorpayResponse.razorpay_signature,
+              order_id: backendOrderId,
+              razorpay_payment_id: rzp.razorpay_payment_id,
+              razorpay_order_id: rzp.razorpay_order_id,
+              razorpay_signature: rzp.razorpay_signature,
             });
-            if (!productFromBuyNow) {
-              await clearCart();
-            }
+          } catch (e) {
+            // PAYMENT FAILED, ORDER STILL EXISTS
+          } finally {
+            if (!productFromBuyNow) await clearCart();
             setSuccess(true);
-          } catch (error) {
-            alert("Payment verification failed");
           }
+        },
+
+        modal: {
+          ondismiss: async () => {
+            // User closed Razorpay popup
+            if (!productFromBuyNow) await clearCart();
+            setSuccess(true);
+          },
         },
       };
 
       const razorpay = new window.Razorpay(options);
       razorpay.open();
-    } catch (error) {
-      if (error.response?.data?.errors) {
-        setErrors(error.response.data.errors);
-      } else {
-        alert(error.response?.data?.error || "Order failed");
-      }
+    } catch (err) {
+      alert("Order could not be placed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
+  /* ===================== SUCCESS PAGE ===================== */
   if (success) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center p-8">
@@ -216,7 +213,7 @@ const Payment = () => {
             Order Confirmed!
           </h1>
           <p className="text-xl text-gray-600 mb-10">
-            Your order is confirmed. Track it in your profile.
+            Your order is placed successfully.
           </p>
           <div className="space-y-4">
             <button

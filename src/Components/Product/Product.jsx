@@ -29,7 +29,7 @@ function Product() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
-  const { state, addToCart,addToWishlist } = useUser();
+  const { state, addToCart, addToWishlist } = useUser();
 
   useEffect(() => {
     setTimeout(() => {
@@ -185,8 +185,7 @@ function Product() {
                   src={datas.image}
                   alt={datas.name}
                   onError={(e) => {
-                    e.target.src =
-                      "https://via.placeholder.com/500x400/f3f4f6/9ca3af?text=Image+Not+Available";
+                    e.currentTarget.src = "/no-image.png";
                   }}
                 />
                 <button

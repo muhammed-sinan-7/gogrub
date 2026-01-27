@@ -29,11 +29,11 @@ function AllProducts() {
         params: {
           page: currentPage,
           page_size: 8,
-          category: categoryFilter !== "all" ? categoryFilter : undefined,
+         ...(categoryFilter !== "all" && { category: categoryFilter }),
         },
       });
 
-      console.log("API RESPONSE:", res.data); // 🔍 TEMP DEBUG
+      console.log("API RESPONSE:", res.data.results); // 🔍 TEMP DEBUG
 
       setFoods(res.data.results || []);
       setTotalCount(res.data.count || 0);

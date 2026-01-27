@@ -23,7 +23,7 @@ function FeaturedFoods() {
         const res = await api.get(ENDPOINTS.HOMEPAGEPRODUCTS)
         setSections({
           special_products: res.data.special_products || [],
-          chinese_products: res.data.chinese_products || [],
+          chinese_products: res.data.chinese_products  || [],
           offer_products: res.data.offer_products || []
         })
       } catch (error) {

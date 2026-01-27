@@ -12,7 +12,8 @@ import Login from "./Components/Auth/Login";
 import Signup from "./Components/Auth/Signup";
 import Payment from "./Components/Payment/Payment";
 import Wishlist from "./Components/Wishlist/wishlist";
-
+import UserNotifications from "./Components/Notification/Notification";
+import AdminNotificationPanel from "./Components/Admin/Notifications";
 import ProductEdit from "./Components/Edit/ProductEdit";
 import OrderConfirmed from "./Components/OrderConfirm";
 import Profile from "./Components/Profile";
@@ -23,10 +24,10 @@ import { Toaster } from 'react-hot-toast';
 import ResetPassword from "./Components/ResetPassword";
 import AdminPanel from "./Components/Admin/AdminPanel";
 import ProductDetailView from "./Components/Admin/ProductDetail";
-
+import { useNotifications } from "./Components/hooks/useNotifications";
 function App() {
   const [user, setUser] = useState(null);
-
+ useNotifications();
   useEffect(() => {
     const savedUser = localStorage.getItem("activeUser");
     if (savedUser) {
@@ -57,6 +58,8 @@ function App() {
         <Route path="/order-confirmed/:order_id" element={<OrderConfirmed />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/password-reset-confirm/:uid/:token" element={<ResetPassword />} />
+        <Route path="/notifications" element={<UserNotifications />} />
+        <Route path="/admin/notifications" element={<AdminNotificationPanel />} />
       </Routes>
     </>
   );

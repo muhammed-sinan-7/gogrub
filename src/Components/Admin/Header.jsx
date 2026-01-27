@@ -1,13 +1,23 @@
 import { Search, Bell } from "lucide-react";
 import { forceLogout } from "../../api/axios";
-const Header = () => (
+import { useNavigate } from "react-router-dom";
+
+
+const Header = () => {
+  const navigate = useNavigate()
+  
+
+return(
+
   <header className="h-20 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-10">
     <div className="relative w-96">
       
     </div>
     <div className="flex items-center gap-4">
       <div className="p-2 text-slate-500 hover:bg-slate-50 rounded-xl relative cursor-pointer">
-        <Bell size={20} />
+        <button onClick={()=>navigate('notifications/') }>
+          <Bell size={20} />
+          </button>
         <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
       </div>
       <div className="flex items-center gap-3 ml-4">
@@ -20,6 +30,7 @@ const Header = () => (
       </div>
     </div>
   </header>
-);
+)
+};
 
 export default Header;
