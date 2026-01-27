@@ -24,7 +24,9 @@ import { Toaster } from 'react-hot-toast';
 import ResetPassword from "./Components/ResetPassword";
 import AdminPanel from "./Components/Admin/AdminPanel";
 import ProductDetailView from "./Components/Admin/ProductDetail";
+import Chatbot from "./Components/Chat/Chatbot";
 import { useNotifications } from "./Components/hooks/useNotifications";
+
 function App() {
   const [user, setUser] = useState(null);
  useNotifications();
@@ -61,6 +63,7 @@ function App() {
         <Route path="/notifications" element={<UserNotifications />} />
         <Route path="/admin/notifications" element={<AdminNotificationPanel />} />
       </Routes>
+      <Chatbot />
     </>
   );
 }
