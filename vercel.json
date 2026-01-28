@@ -1,5 +1,8 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html"}
-]
+    {
+      "source": "/api/(.*)",
+      "destination": "http://gogrub-alb-501887976.ap-south-1.elb.amazonaws.com/api/$1"
+    }
+  ]
 }
