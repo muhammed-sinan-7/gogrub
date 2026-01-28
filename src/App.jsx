@@ -17,7 +17,7 @@ import AdminNotificationPanel from "./Components/Admin/Notifications";
 import ProductEdit from "./Components/Edit/ProductEdit";
 import OrderConfirmed from "./Components/OrderConfirm";
 import Profile from "./Components/Profile";
-import AddProduct from "./Components/AddProduct";
+import AddProduct from "./Components/Admin/AddProduct";
 import EditOrder from "./Components/Edit/OrderEdit";
 import ForgotPassword from "./Components/ForgotPassword";
 import { Toaster } from 'react-hot-toast';
