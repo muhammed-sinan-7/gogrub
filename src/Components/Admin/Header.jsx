@@ -1,5 +1,5 @@
 import { Search, Bell } from "lucide-react";
-import { forceLogout } from "../../api/axios";
+import { handleLogout } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 
 
@@ -22,7 +22,7 @@ return(
       </div>
       <div className="flex items-center gap-3 ml-4">
         <div className="text-right">
-          <button onClick={()=> forceLogout()}>LogOut</button>
+          <button onClick={()=> handleLogout()}>LogOut</button>
           <p className="text-sm font-bold text-slate-900 leading-none">Admin</p>
           <p className="text-[10px] text-slate-400 uppercase font-bold mt-1 tracking-wider">Manager</p>
         </div>

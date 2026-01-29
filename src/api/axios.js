@@ -47,7 +47,7 @@ api.interceptors.response.use(
       const refresh = localStorage.getItem('refresh');
 
       if (!refresh) {
-        forceLogout();
+        handleLogout();
         return Promise.reject(error);
       }
 
@@ -64,7 +64,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
-        forceLogout();
+        handleLogout();
         return Promise.reject(refreshError);
       }
     }
