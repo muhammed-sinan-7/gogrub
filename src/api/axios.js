@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ENDPOINTS } from './endpoints';
-
+import { useNavigate } from 'react-router-dom';
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
@@ -23,9 +23,9 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
 // Force logout helper
 export const handleLogout = async () => {
+  const navigate = useNavigate()
   
   localStorage.clear();
   navigate("/", { replace: true });
