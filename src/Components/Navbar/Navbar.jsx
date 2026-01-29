@@ -16,7 +16,7 @@ import {
   BellIcon,
 } from "lucide-react";
 import { useUser } from "../../Context/UserContext";
-import api, { forceLogout } from "../../api/axios";
+import api,{ handleLogout } from "../../api/axios";
 
 function Navbar() {
   const { state } = useUser();
@@ -168,7 +168,7 @@ function Navbar() {
                     </button>
                     <button
                       onClick={() => {
-                        forceLogout();
+                        handleLogout();
                         setIsProfileOpen(false);
                       }}
                       className="w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 text-red-600 hover:bg-red-50 font-medium border-t border-slate-50"

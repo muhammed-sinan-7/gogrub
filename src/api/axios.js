@@ -25,11 +25,11 @@ api.interceptors.request.use(
 );
 
 // Force logout helper
-export function forceLogout() {
-  localStorage.removeItem('access');
-  localStorage.removeItem('refresh');
-  window.location.replace('/login');
-}
+export const handleLogout = async () => {
+  await api.post("/auth/logout/");
+  localStorage.clear();
+  navigate("/", { replace: true });
+};
 
 // Response Interceptor
 api.interceptors.response.use(
