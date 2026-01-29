@@ -16,13 +16,18 @@ import {
   BellIcon,
 } from "lucide-react";
 import { useUser } from "../../Context/UserContext";
-import api,{ handleLogout } from "../../api/axios";
+import api from "../../api/axios";
 
 function Navbar() {
   const { state } = useUser();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const logout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    navigate("/", { replace: true });
+  };
   // States
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -168,7 +173,7 @@ function Navbar() {
                     </button>
                     <button
                       onClick={() => {
-                        handleLogout();
+                        logout(),
                         setIsProfileOpen(false);
                       }}
                       className="w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 text-red-600 hover:bg-red-50 font-medium border-t border-slate-50"

@@ -1,5 +1,5 @@
 import { Search, Bell } from "lucide-react";
-import { handleLogout } from "../../api/axios";
+
 import { useNavigate } from "react-router-dom";
 
 
