@@ -5,7 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate()
-  
+  const logout = () => {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    navigate("/", { replace: true });
+  };
 
 return(
 
@@ -22,7 +26,7 @@ return(
       </div>
       <div className="flex items-center gap-3 ml-4">
         <div className="text-right">
-          <button onClick={()=> handleLogout()}>LogOut</button>
+          <button onClick={logout}>LogOut</button>
           <p className="text-sm font-bold text-slate-900 leading-none">Admin</p>
           <p className="text-[10px] text-slate-400 uppercase font-bold mt-1 tracking-wider">Manager</p>
         </div>

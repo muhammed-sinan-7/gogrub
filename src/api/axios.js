@@ -24,12 +24,15 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 // Force logout helper
-export const handleLogout = async () => {
-  const navigate = useNavigate()
-  
-  localStorage.clear();
-  navigate("/", { replace: true });
+// axios.js
+export const clearAuthAndReload = () => {
+  localStorage.removeItem("access");
+  localStorage.removeItem("refresh");
+
+  // Hard redirect (safe everywhere)
+  window.location.href = "/";
 };
+
 
 // Response Interceptor
 api.interceptors.response.use(
@@ -47,7 +50,7 @@ api.interceptors.response.use(
       const refresh = localStorage.getItem('refresh');
 
       if (!refresh) {
-        handleLogout();
+        clearAuthAndReload();
         return Promise.reject(error);
       }
 
@@ -64,7 +67,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
-        handleLogout();
+        clearAuthAndReload();
         return Promise.reject(refreshError);
       }
     }
