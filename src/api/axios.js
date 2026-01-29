@@ -26,7 +26,7 @@ api.interceptors.request.use(
 
 // Force logout helper
 export const handleLogout = async () => {
-  await api.post("/auth/logout/");
+  
   localStorage.clear();
   navigate("/", { replace: true });
 };
