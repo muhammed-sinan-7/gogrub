@@ -10,6 +10,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import { ENDPOINTS } from "../../api/endpoints";
 
 const CLOUDINARY_CLOUD_NAME = "dyneydwxx";
 const CLOUDINARY_UPLOAD_PRESET = "Product_preset";
@@ -41,7 +42,7 @@ const ProductDetailView = ({ productId, onBack }) => {
     const fetchProduct = async () => {
       setLoading(true);
       try {
-        const res = await api.get(`/admin/products/${productId}/`);
+        const res = await api.get(ENDPOINTS.ADMIN_SINGLE_PRODUCT(productId));
         setProduct(res.data);
         setFormData(res.data);
         setPreviewUrl(res.data.image);
@@ -99,7 +100,7 @@ const ProductDetailView = ({ productId, onBack }) => {
         description: formData.description,
         image: finalImageUrl,
       };
-      const res = await api.put(`/admin/products/${productId}/`, payload);
+      const res = await api.put(ENDPOINTS.ADMIN_SINGLE_PRODUCT(productId), payload);
       setProduct(res.data);
       setFormData(res.data);
       setPreviewUrl(res.data.image);

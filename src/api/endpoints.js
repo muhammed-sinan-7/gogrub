@@ -36,5 +36,5 @@ export const ENDPOINTS = {
   CATEGORIES: 'api/admin/categories/',
   ADMIN_USERS: 'api/admin/users/',
   ADMIN_ORDERS: 'api/admin/orders/',
-  ADMIN_SINGLE_PRODUCT: (id) => `api/admin/${id}/`,
+  ADMIN_SINGLE_PRODUCT: (id) => `api/admin/products/${id}/`,
 };
