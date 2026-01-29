@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { ENDPOINTS } from './endpoints';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL; 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true, 
   timeout: 10000,
 });
 
@@ -23,12 +24,14 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+// Force logout helper
 export function forceLogout() {
   localStorage.removeItem('access');
   localStorage.removeItem('refresh');
   window.location.replace('/login');
 }
-// Response Interceptor - FIXED
+
+// Response Interceptor
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -37,37 +40,35 @@ api.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.includes('refresh')  
+      !originalRequest.url.includes('refresh')
     ) {
       originalRequest._retry = true;
 
       const refresh = localStorage.getItem('refresh');
-      
+
       if (!refresh) {
-        localStorage.removeItem('access');
-        localStorage.removeItem('refresh');
-        window.location.replace('/login');  
+        forceLogout();
         return Promise.reject(error);
       }
 
       try {
-        const refreshResponse = await axios.post(
-          `${BASE_URL}${ENDPOINTS.REFRESH}`, 
-          { refresh },
-          { headers: { 'Content-Type': 'application/json' } }
+        const refreshResponse = await api.post(
+          ENDPOINTS.REFRESH,
+          { refresh }
         );
 
         localStorage.setItem('access', refreshResponse.data.access);
-        originalRequest.headers.Authorization = `Bearer ${refreshResponse.data.access}`;
+        originalRequest.headers.Authorization =
+          `Bearer ${refreshResponse.data.access}`;
+
         return api(originalRequest);
       } catch (refreshError) {
         console.error('Token refresh failed:', refreshError);
-        localStorage.removeItem('access');
-        localStorage.removeItem('refresh');
-        window.location.replace('/login');  
+        forceLogout();
         return Promise.reject(refreshError);
       }
     }
+
     return Promise.reject(error);
   }
 );
