@@ -30,7 +30,7 @@ export const clearAuthAndReload = () => {
   localStorage.removeItem("refresh");
 
   // Hard redirect (safe everywhere)
-  window.location.href = "/";
+  triggerLogout();
 };
 
 

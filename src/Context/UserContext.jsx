@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import api from "../api/axios";
 import { ENDPOINTS } from "../api/endpoints";
-
+import { registerLogout } from "../api/authEvents";
 const UserContext = createContext();
 
 const initialState = {
@@ -40,6 +40,15 @@ const reducer = (state, action) => {
       return {
         ...state,
         cart: action.payload,
+      };
+    case "LOGOUT":
+      return {
+        user: null,
+        cart: [],
+        wishlist: [],
+        notifications: [],
+        wsConnected: false,
+        loading: false,
       };
 
     case "SET_WISHLIST":
@@ -133,11 +142,16 @@ export const UserProvider = ({ children }) => {
   };
 
   const logout = () => {
-    console.log("🚪 LOGOUT TRIGGERED");
-    dispatch({ type: "SET_USER", payload: null });
+    console.log("🚪 LOGOUT (CONTEXT)");
+
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
+
+    dispatch({ type: "LOGOUT" });
   };
+  useEffect(() => {
+    registerLogout(logout);
+  }, []);
 
   const addToCart = async (product, quantity) => {
     try {

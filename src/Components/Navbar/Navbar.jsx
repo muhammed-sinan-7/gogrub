@@ -23,11 +23,11 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const logout = () => {
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
-    navigate("/", { replace: true });
-  };
+  const {logout}  =  useUser();
+  const handleLogout = () => {
+  logout();
+  navigate("/", { replace: true });
+};
   // States
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -149,7 +149,7 @@ function Navbar() {
             </button>
 
             {/* Profile Dropdown (Shared UI) */}
-            {localStorage.getItem("access") ? (
+            {state.user ? (
               <div className="relative">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -173,7 +173,7 @@ function Navbar() {
                     </button>
                     <button
                       onClick={() => {
-                        logout(),
+                        handleLogout();
                         setIsProfileOpen(false);
                       }}
                       className="w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 text-red-600 hover:bg-red-50 font-medium border-t border-slate-50"
