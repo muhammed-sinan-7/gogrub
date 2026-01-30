@@ -18,6 +18,7 @@ import { useUser } from "../../Context/UserContext";
 import Navbar from "../Navbar/Navbar";
 import api from "../../api/axios";
 import toast from "react-hot-toast";
+import { ENDPOINTS } from "../../api/endpoints";
 
 function Product() {
   const { id } = useParams();
@@ -43,7 +44,7 @@ function Product() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const url = `/products/${id}/`;
+        const url = ENDPOINTS.PRODUCT_ID(id);
         const res = await api.get(url);
         console.log(res.data);
         setDatas(res.data);
