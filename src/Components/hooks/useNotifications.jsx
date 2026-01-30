@@ -31,9 +31,11 @@ export const useNotifications = () => {
     }
 
     // ✅ CORRECT WS URL (direct to backend)
-    const wsUrl = `${BACKEND_WS_BASE}/ws/notifications/?token=${encodeURIComponent(
-      token
-    )}`;
+    new wsUrl(
+  "wss://api.gogrub.online/ws/notifications/",
+  ["jwt", token]
+);
+
 
     // If URL changed (token/user changed), reset socket
     if (socketSingleton && socketUrlForSingleton !== wsUrl) {
