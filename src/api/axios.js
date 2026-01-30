@@ -39,9 +39,16 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    const status = error.response?.status;
 
+
+    if (status >= 500) {
+      return Promise.reject(error);
+    }
+
+   
     if (
-      error.response?.status === 401 &&
+      status === 401 &&
       !originalRequest._retry &&
       !originalRequest.url.includes('refresh')
     ) {
@@ -66,7 +73,7 @@ api.interceptors.response.use(
 
         return api(originalRequest);
       } catch (refreshError) {
-        console.error('Token refresh failed:', refreshError);
+        // 🔴 Only HERE we logout
         clearAuthAndReload();
         return Promise.reject(refreshError);
       }
@@ -74,6 +81,8 @@ api.interceptors.response.use(
 
     return Promise.reject(error);
   }
+
+
 );
 
 export default api;
