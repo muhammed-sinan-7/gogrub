@@ -1,49 +1,31 @@
-// Singleton WebSocket with reference counting
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useUser } from "../../Context/UserContext";
-
-let socketSingleton = null;
-let socketRefCount = 0;
-let socketUrlForSingleton = null;
 
 export const useNotifications = () => {
   const { state, dispatch } = useUser();
+  const socketRef = useRef(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("access");
-
-    if (!token) {
-      if (socketSingleton) {
-        socketSingleton.close();
-        socketSingleton = null;
-        socketRefCount = 0;
-      }
-      dispatch({ type: "SET_WS_CONNECTED", payload: false });
+    // 🔒 Wait until auth is fully ready
+    if (!state.authLoaded || !state.user) {
       return;
     }
+
+    // 🛑 Prevent duplicate connections
+    if (socketRef.current) {
+      return;
+    }
+
+    const token = localStorage.getItem("access");
+    if (!token) return;
 
     const wsUrl = "wss://api.gogrub.online/ws/notifications/";
 
-    if (socketSingleton && socketUrlForSingleton === wsUrl) {
-      socketRefCount += 1;
-      return;
-    }
-
-    if (socketSingleton) {
-      socketSingleton.close();
-      socketSingleton = null;
-    }
-
-    const socket = new WebSocket(
-  wsUrl,
-  ["jwt", token] 
-);
-    socketSingleton = socket;
-    socketUrlForSingleton = wsUrl;
-    socketRefCount = 1;
+    const socket = new WebSocket(wsUrl, ["jwt", token]);
+    socketRef.current = socket;
 
     socket.onopen = () => {
-      console.log("✅ WebSocket connected", wsUrl);
+      console.log("✅ WebSocket connected");
       dispatch({ type: "SET_WS_CONNECTED", payload: true });
     };
 
@@ -62,19 +44,16 @@ export const useNotifications = () => {
 
     socket.onclose = () => {
       console.warn("⚠️ WebSocket closed");
-      socketSingleton = null;
-      socketUrlForSingleton = null;
-      socketRefCount = 0;
+      socketRef.current = null;
       dispatch({ type: "SET_WS_CONNECTED", payload: false });
     };
 
+    // 🧹 Cleanup ONLY on logout / unmount
     return () => {
-      socketRefCount -= 1;
-      if (socketRefCount <= 0 && socketSingleton) {
-        socketSingleton.close();
-        socketSingleton = null;
-        socketUrlForSingleton = null;
+      if (socketRef.current) {
+        socketRef.current.close();
+        socketRef.current = null;
       }
     };
-  }, [state.user?.id, dispatch]);
+  }, [state.authLoaded, state.user?.id]); 
 };
