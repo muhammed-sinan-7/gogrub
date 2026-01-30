@@ -139,7 +139,7 @@ const Payment = () => {
       }
 
       /* ===== ORDER IS CREATED HERE (SOURCE OF TRUTH) ===== */
-      const res = await api.post("/orders/create/", payload);
+      const res = await api.post("api/orders/create/", payload);
       const backendOrderId = res.data.order_id;
 
       /* ===== CASH ON DELIVERY ===== */
@@ -165,7 +165,7 @@ const Payment = () => {
 
         handler: async (rzp) => {
           try {
-            await api.post("/orders/verify-payment/", {
+            await api.post("api/orders/verify-payment/", {
               order_id: backendOrderId,
               razorpay_payment_id: rzp.razorpay_payment_id,
               razorpay_order_id: rzp.razorpay_order_id,
