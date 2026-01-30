@@ -1,15 +1,10 @@
-// Singleton WebSocket with reference counting to avoid duplicate sockets
+// Singleton WebSocket with reference counting
 import { useEffect } from "react";
 import { useUser } from "../../Context/UserContext";
 
 let socketSingleton = null;
 let socketRefCount = 0;
 let socketUrlForSingleton = null;
-
-// 🔥 IMPORTANT: backend WS base (NOT Vercel)
-const BACKEND_WS_BASE =
-  import.meta.env.VITE_BACKEND_WS_BASE ||
-  "wss://api.gogrub.online"; // ← change to your backend domain
 
 export const useNotifications = () => {
   const { state, dispatch } = useUser();
@@ -19,70 +14,51 @@ export const useNotifications = () => {
 
     if (!token) {
       if (socketSingleton) {
-        socketRefCount = Math.max(0, socketRefCount - 1);
-        if (socketRefCount === 0) {
-          socketSingleton.close();
-          socketSingleton = null;
-          socketUrlForSingleton = null;
-        }
+        socketSingleton.close();
+        socketSingleton = null;
+        socketRefCount = 0;
       }
       dispatch({ type: "SET_WS_CONNECTED", payload: false });
       return;
     }
 
-    // ✅ CORRECT WS URL (direct to backend)
-    new wsUrl(
-  "wss://api.gogrub.online/ws/notifications/",
-  ["jwt", token]
-);
+    const wsUrl = `wss://api.gogrub.online/ws/notifications/?token=${encodeURIComponent(token)}`;
 
-
-    // If URL changed (token/user changed), reset socket
-    if (socketSingleton && socketUrlForSingleton !== wsUrl) {
-      try {
-        socketSingleton.close();
-      } catch (_) {}
-      socketSingleton = null;
-      socketRefCount = 0;
-      socketUrlForSingleton = null;
-    }
-
-    // Reuse existing socket
-    if (socketSingleton) {
+    if (socketSingleton && socketUrlForSingleton === wsUrl) {
       socketRefCount += 1;
-      dispatch({ type: "SET_WS_CONNECTED", payload: true });
       return;
     }
 
-    // Create singleton socket
+    if (socketSingleton) {
+      socketSingleton.close();
+      socketSingleton = null;
+    }
+
     const socket = new WebSocket(wsUrl);
     socketSingleton = socket;
-    socketRefCount = 1;
     socketUrlForSingleton = wsUrl;
+    socketRefCount = 1;
 
     socket.onopen = () => {
-      console.log("✅ WebSocket connected:", wsUrl);
+      console.log("✅ WebSocket connected", wsUrl);
       dispatch({ type: "SET_WS_CONNECTED", payload: true });
     };
 
     socket.onmessage = (event) => {
       try {
-        const parsed = JSON.parse(event.data);
-        dispatch({
-          type: "ADD_NOTIFICATION",
-          payload: parsed.payload ?? parsed,
-        });
-      } catch (err) {
-        console.error("Failed to parse WS message", err, event.data);
+        const data = JSON.parse(event.data);
+        dispatch({ type: "ADD_NOTIFICATION", payload: data });
+      } catch (e) {
+        console.error("WS parse error", e);
       }
     };
 
-    socket.onerror = (err) => {
-      console.error("❌ WebSocket error", err);
+    socket.onerror = (e) => {
+      console.error("❌ WebSocket error", e);
     };
 
-    socket.onclose = (ev) => {
-      console.warn("⚠️ WebSocket closed", ev);
+    socket.onclose = () => {
+      console.warn("⚠️ WebSocket closed");
       socketSingleton = null;
       socketUrlForSingleton = null;
       socketRefCount = 0;
@@ -90,15 +66,12 @@ export const useNotifications = () => {
     };
 
     return () => {
-      socketRefCount = Math.max(0, socketRefCount - 1);
-      if (socketRefCount === 0 && socketSingleton) {
-        try {
-          socketSingleton.close();
-        } catch (_) {}
+      socketRefCount -= 1;
+      if (socketRefCount <= 0 && socketSingleton) {
+        socketSingleton.close();
         socketSingleton = null;
         socketUrlForSingleton = null;
       }
-      dispatch({ type: "SET_WS_CONNECTED", payload: false });
     };
   }, [state.user, dispatch]);
 };
