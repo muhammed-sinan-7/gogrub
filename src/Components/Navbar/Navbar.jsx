@@ -20,6 +20,8 @@ import api from "../../api/axios";
 
 function Navbar() {
   const { state } = useUser();
+  const { authLoaded, user } = state;
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -65,6 +67,11 @@ function Navbar() {
   const userInitial = state.user?.fullname?.[0]?.toUpperCase() || "U";
   const isActive = (path) =>
     location.pathname === path ? "text-orange-500" : "text-slate-500";
+
+
+    if (!authLoaded) {
+  return null; // or loading skeleton if you want
+}
 
   return (
     <>
@@ -149,7 +156,7 @@ function Navbar() {
             </button>
 
             {/* Profile Dropdown (Shared UI) */}
-            {state.user ? (
+            {user ? (
               <div className="relative">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}

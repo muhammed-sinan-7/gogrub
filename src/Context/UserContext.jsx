@@ -9,8 +9,9 @@ const initialState = {
   cart: [],
   wishlist: [],
   loading: true,
+  authLoaded: false,
   notifications: [],
-  wsConnected: false, // ADD THIS
+  wsConnected: false,
 };
 
 const reducer = (state, action) => {
@@ -71,6 +72,22 @@ const reducer = (state, action) => {
         ...state,
         notifications: action.payload,
       };
+    case "AUTH_LOADED":
+      return {
+        ...state,
+        authLoaded: true,
+      };
+
+    case "CLEAR_USER":
+      return {
+        ...state,
+        user: null,
+        cart: [],
+        wishlist: [],
+        notifications: [],
+        wsConnected: false,
+        authLoaded: true,
+      };
 
     default:
       return state;
@@ -79,6 +96,22 @@ const reducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  
+  const loadUser = async () => {
+  try {
+    const res = await api.get(ENDPOINTS.ME); // /api/auth/me/
+    dispatch({ type: "SET_USER", payload: res.data });
+    await hydrateUserData();
+  } catch (error) {
+    localStorage.removeItem("access");
+    localStorage.removeItem("refresh");
+    dispatch({ type: "CLEAR_USER" });
+  }
+};
+
+
+
 
   const loadCart = async () => {
     try {
@@ -117,13 +150,15 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const access = localStorage.getItem("access");
-    if (access) {
-      hydrateUserData();
-    } else {
-      dispatch({ type: "SET_LOADING", payload: false });
-    }
-  }, []);
+  const access = localStorage.getItem("access");
+
+  if (access) {
+    loadUser(); 
+  } else {
+    dispatch({ type: "AUTH_LOADED" });
+    dispatch({ type: "SET_LOADING", payload: false });
+  }
+}, []);
 
   const login = async (JWTResponse) => {
     const { access, refresh, user } = JWTResponse;

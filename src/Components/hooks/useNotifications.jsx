@@ -76,5 +76,5 @@ export const useNotifications = () => {
         socketUrlForSingleton = null;
       }
     };
-  }, [state.user, dispatch]);
+  }, [state.user?.id, dispatch]);
 };
