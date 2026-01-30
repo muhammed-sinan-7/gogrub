@@ -25,7 +25,8 @@ function Login() {
         email,
         password,
       });
-
+      localStorage.setItem("access", response.data.access);
+localStorage.setItem("refresh", response.data.refresh);
       login(response.data);
       if (!response.data.user?.is_active){
         toast.error("User Blocked. Contact Admin")
@@ -68,7 +69,8 @@ function Login() {
       const res = await api.post(ENDPOINTS.GOOGLE_LOGIN, {
         id_token: credentialResponse.credential,
       });
-
+localStorage.setItem("access", res.data.access);
+localStorage.setItem("refresh", res.data.refresh);
       login(res.data);
       
       res.data.user?.is_staff
