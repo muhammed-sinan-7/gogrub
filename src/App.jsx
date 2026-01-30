@@ -25,11 +25,11 @@ import ResetPassword from "./Components/ResetPassword";
 import AdminPanel from "./Components/Admin/AdminPanel";
 import ProductDetailView from "./Components/Admin/ProductDetail";
 import Chatbot from "./Components/Chat/Chatbot";
-import { useNotifications } from "./Components/hooks/useNotifications";
+
 
 function App() {
   const [user, setUser] = useState(null);
- useNotifications();
+ cations();
   useEffect(() => {
     const savedUser = localStorage.getItem("activeUser");
     if (savedUser) {

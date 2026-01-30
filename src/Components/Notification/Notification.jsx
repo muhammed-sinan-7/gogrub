@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Bell, Package, Tag, Clock } from "lucide-react";
 import { useUser } from "../../Context/UserContext";
-import { useNotifications } from "../hooks/useNotifications";
+
 import Navbar from "../Navbar/Navbar";
 
 const UserNotificationView = () => {
   // Initializes WebSocket (idempotent)
-  useNotifications();
+  cations();
 
   const { state } = useUser();
   const notifications = state.notifications ?? [];

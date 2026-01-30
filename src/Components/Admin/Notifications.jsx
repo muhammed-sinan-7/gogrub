@@ -1,10 +1,10 @@
 import { ShieldCheck, AlertCircle } from "lucide-react";
 import { useUser } from "../../Context/UserContext";
-import { useNotifications } from "../hooks/useNotifications";
+
 import { useEffect } from "react";
 
 const AdminNotificationView = () => {
-  useNotifications(); // Initializes socket
+  cations(); // Initializes socket
   const { state } = useUser();
   const notifications = state.notifications;
 
@@ -18,7 +18,7 @@ const AdminNotificationView = () => {
       try {
         const res = await api.get("/notifications/");
         dispatch({
-          type: "LOAD_NOTIFICATIONS",
+          type: "CATIONS",
           payload: res.data,
         });
       } catch (err) {

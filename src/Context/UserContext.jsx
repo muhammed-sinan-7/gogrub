@@ -11,7 +11,7 @@ const initialState = {
   loading: true,
   authLoaded: false,
   notifications: [],
-  wsConnected: false,
+  ected: false,
 };
 
 const reducer = (state, action) => {
@@ -23,7 +23,7 @@ const reducer = (state, action) => {
           user: null,
           cart: [],
           wishlist: [],
-          wsConnected: false, // Reset on logout
+          ected: false, // Reset on logout
         };
       }
       return {
@@ -31,10 +31,10 @@ const reducer = (state, action) => {
         user: action.payload,
       };
 
-    case "SET_WS_CONNECTED": // ADD THIS
+    case "_CONNECTED": // ADD THIS
       return {
         ...state,
-        wsConnected: action.payload,
+        ected: action.payload,
       };
 
     case "SET_CART":
@@ -48,7 +48,7 @@ const reducer = (state, action) => {
         cart: [],
         wishlist: [],
         notifications: [],
-        wsConnected: false,
+        ected: false,
         loading: false,
       };
 
@@ -61,13 +61,13 @@ const reducer = (state, action) => {
     case "SET_LOADING":
       return { ...state, loading: action.payload };
 
-    case "ADD_NOTIFICATION":
+    case "CATION":
       return {
         ...state,
         notifications: [action.payload, ...state.notifications],
       };
 
-    case "LOAD_NOTIFICATIONS":
+    case "CATIONS":
       return {
         ...state,
         notifications: action.payload,
@@ -85,7 +85,7 @@ const reducer = (state, action) => {
         cart: [],
         wishlist: [],
         notifications: [],
-        wsConnected: false,
+        ected: false,
         authLoaded: true,
       };
 
@@ -98,17 +98,21 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   
-  const loadUser = async () => {
+ const loadUser = async () => {
   try {
     const res = await api.get(ENDPOINTS.ME); // /api/auth/me/
-    dispatch({ type: "SET_USER", payload: res.data });
+    
+    dispatch({ type: "SET_USER", payload: res.data.user });
     await hydrateUserData();
   } catch (error) {
-    localStorage.removeItem("access");
-    localStorage.removeItem("refresh");
+    
     dispatch({ type: "CLEAR_USER" });
+  } finally {
+    dispatch({ type: "AUTH_LOADED" });
+    dispatch({ type: "SET_LOADING", payload: false });
   }
 };
+
 
 
 
