@@ -22,7 +22,7 @@ export const useNotifications = () => {
       return;
     }
 
-    const wsUrl = `wss://api.gogrub.online/ws/notifications/?token=${encodeURIComponent(token)}`;
+    const wsUrl = "wss://api.gogrub.online/ws/notifications/";
 
     if (socketSingleton && socketUrlForSingleton === wsUrl) {
       socketRefCount += 1;
@@ -34,7 +34,10 @@ export const useNotifications = () => {
       socketSingleton = null;
     }
 
-    const socket = new WebSocket(wsUrl);
+    const socket = new WebSocket(
+  wsUrl,
+  ["jwt", token] 
+);
     socketSingleton = socket;
     socketUrlForSingleton = wsUrl;
     socketRefCount = 1;
