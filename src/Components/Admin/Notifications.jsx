@@ -4,7 +4,7 @@ import { useUser } from "../../Context/UserContext";
 import { useEffect } from "react";
 
 const AdminNotificationView = () => {
-  cations(); // Initializes socket
+ (); // Initializes socket
   const { state } = useUser();
   const notifications = state.notifications;
 

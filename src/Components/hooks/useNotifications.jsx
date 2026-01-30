@@ -1,7 +1,7 @@
 // import { useEffect, useRef } from "react";
 // import { useUser } from "../../Context/UserContext";
 
-// export const cations = () => {
+// export const = () => {
 //   const { state, dispatch } = useUser();
 //   const socketRef = useRef(null);
 

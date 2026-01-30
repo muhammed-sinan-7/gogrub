@@ -29,7 +29,7 @@ import Chatbot from "./Components/Chat/Chatbot";
 
 function App() {
   const [user, setUser] = useState(null);
- cations();
+();
   useEffect(() => {
     const savedUser = localStorage.getItem("activeUser");
     if (savedUser) {

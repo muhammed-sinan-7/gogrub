@@ -6,7 +6,7 @@ import Navbar from "../Navbar/Navbar";
 
 const UserNotificationView = () => {
   // Initializes WebSocket (idempotent)
-  cations();
+ ();
 
   const { state } = useUser();
   const notifications = state.notifications ?? [];
