@@ -151,12 +151,7 @@ const ProductDetailView = ({ productId, onBack }) => {
           <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
             <div className="relative">
               <img src={previewUrl} alt={product.name} className="w-full aspect-square object-cover" />
-              <div className="absolute bottom-4 left-4 flex gap-2">
-                {product.is_available ? 
-                  <span className="bg-black/80 backdrop-blur text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">In Stock</span> : 
-                  <span className="bg-red-500 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Out of Stock</span>
-                }
-              </div>
+              
             </div>
             <div className="p-6">
               <h1 className="text-2xl font-black text-slate-900 uppercase">{product.name}</h1>
