@@ -199,7 +199,7 @@ const ProductDetailView = ({ productId, onBack }) => {
                       type="number"
                       name="category"
                       disabled={!isEditing}
-                      value={formData.category}
+                      value={formData.category_name}
                       onChange={handleChange}
                       className="w-full bg-slate-50 border-none p-3.5 rounded-xl font-bold text-slate-900 focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
                     />
