@@ -59,7 +59,7 @@ const ProductDetailView = ({ productId, onBack }) => {
   useEffect(() => {
   const fetchCategories = async () => {
     try {
-      const res = await api.get(ENDPOINTS.ADMIN_CATEGORIES);
+      const res = await api.get(ENDPOINTS.CATEGORIES);
       setCategories(res.data);
     } catch {
       toast.error("Failed to load categories");
