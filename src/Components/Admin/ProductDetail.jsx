@@ -36,7 +36,7 @@ const ProductDetailView = ({ productId, onBack }) => {
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageUploading, setImageUploading] = useState(false);
-
+  const [categories,setCategories]= useState([])
   useEffect(() => {
     if (!productId) return;
     const fetchProduct = async () => {
@@ -54,6 +54,20 @@ const ProductDetailView = ({ productId, onBack }) => {
     };
     fetchProduct();
   }, [productId]);
+
+
+  useEffect(() => {
+  const fetchCategories = async () => {
+    try {
+      const res = await api.get(ENDPOINTS.ADMIN_CATEGORIES);
+      setCategories(res.data);
+    } catch {
+      toast.error("Failed to load categories");
+    }
+  };
+  fetchCategories();
+}, []);
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
