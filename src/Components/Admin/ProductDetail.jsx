@@ -116,7 +116,8 @@ const ProductDetailView = ({ productId, onBack }) => {
       const payload = {
         name: formData.name,
         price: Number(formData.price),
-        category: Number(formData.category),
+        category: formData.category ? Number(formData.category) : null,
+
         is_special: formData.is_special,
         is_available: formData.is_available,
         description: formData.description,
@@ -142,7 +143,12 @@ const ProductDetailView = ({ productId, onBack }) => {
       setIsEditing(false);
       toast.success("Product updated successfully");
     } catch (err) {
-      toast.error("Update failed");
+      console.error(err.response?.data);
+  toast.error(
+    err.response?.data?.detail ||
+    err.response?.data?.error ||
+    "Update failed"
+  );
     } finally {
       setUpdating(false);
     }
