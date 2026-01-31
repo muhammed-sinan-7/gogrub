@@ -36,7 +36,7 @@ const OrderManagementView = ({ orders = [], onNavigate }) => {
 
   try {
     // 2. BACKEND UPDATE
-    await api.patch(`/admin/orders/${orderId}/update-status/`, {
+    await api.patch(`api/admin/orders/${orderId}/update-status/`, {
       status: newStatus,
     });
     
