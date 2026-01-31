@@ -36,7 +36,7 @@ const ProductDetailView = ({ productId, onBack }) => {
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageUploading, setImageUploading] = useState(false);
-  const [categories,setCategories]= useState([])
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     if (!productId) return;
     const fetchProduct = async () => {
@@ -55,19 +55,17 @@ const ProductDetailView = ({ productId, onBack }) => {
     fetchProduct();
   }, [productId]);
 
-
   useEffect(() => {
-  const fetchCategories = async () => {
-    try {
-      const res = await api.get(ENDPOINTS.CATEGORIES);
-      setCategories(res.data);
-    } catch {
-      toast.error("Failed to load categories");
-    }
-  };
-  fetchCategories();
-}, []);
-
+    const fetchCategories = async () => {
+      try {
+        const res = await api.get(ENDPOINTS.CATEGORIES);
+        setCategories(res.data);
+      } catch {
+        toast.error("Failed to load categories");
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -129,7 +127,16 @@ const ProductDetailView = ({ productId, onBack }) => {
         payload,
       );
       setProduct(res.data);
-      setFormData(res.data);
+      setFormData({
+        name: res.data.name,
+        price: res.data.price,
+        category: res.data.category, // ✅ ID ONLY
+        is_special: res.data.is_special,
+        is_available: res.data.is_available,
+        description: res.data.description,
+        image: res.data.image,
+      });
+
       setPreviewUrl(res.data.image);
       setImageFile(null);
       setIsEditing(false);
@@ -142,7 +149,16 @@ const ProductDetailView = ({ productId, onBack }) => {
   };
 
   const cancelEdit = () => {
-    setFormData(product);
+    setFormData({
+      name: product.name,
+      price: product.price,
+      category: product.category,
+      is_special: product.is_special,
+      is_available: product.is_available,
+      description: product.description,
+      image: product.image,
+    });
+
     setPreviewUrl(product.image);
     setImageFile(null);
     setIsEditing(false);
