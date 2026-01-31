@@ -44,7 +44,16 @@ const ProductDetailView = ({ productId, onBack }) => {
       try {
         const res = await api.get(ENDPOINTS.ADMIN_SINGLE_PRODUCT(productId));
         setProduct(res.data);
-        setFormData(res.data);
+       setFormData({
+  name: res.data.name,
+  price: res.data.price,
+  category: res.data.category, // ✅ ID only
+  is_special: res.data.is_special,
+  is_available: res.data.is_available,
+  description: res.data.description,
+  image: res.data.image,
+});
+
         setPreviewUrl(res.data.image);
       } catch (err) {
         toast.error("Failed to load product");
@@ -114,15 +123,15 @@ const ProductDetailView = ({ productId, onBack }) => {
         finalImageUrl = uploadedUrl;
       }
       const payload = {
-        name: formData.name,
-        price: Number(formData.price),
-        category: formData.category ? Number(formData.category) : null,
+  name: formData.name,
+  price: Number(formData.price),
+  category: Number(formData.category || product.category),
+  is_special: formData.is_special,
+  is_available: formData.is_available,
+  description: formData.description,
+  image: finalImageUrl,
+};
 
-        is_special: formData.is_special,
-        is_available: formData.is_available,
-        description: formData.description,
-        image: finalImageUrl,
-      };
       const res = await api.put(
         ENDPOINTS.ADMIN_SINGLE_PRODUCT(productId),
         payload,
