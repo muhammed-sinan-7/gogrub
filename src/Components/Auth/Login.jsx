@@ -25,28 +25,38 @@ function Login() {
         email,
         password,
       });
-      localStorage.setItem("access", response.data.access);
-localStorage.setItem("refresh", response.data.refresh);
-      login(response.data);
-      if (!response.data.user?.is_active){
-        toast.error("User Blocked. Contact Admin")
+
+      const { access, refresh, user } = response.data;
+
+      // Blocked user check
+      if (!user?.is_active) {
+        toast.error("User blocked. Contact admin.");
+        return;
       }
-      response.data.user?.is_staff
-        ? navigate("/admin")
-        : navigate("/");
+
+      // Save tokens
+      localStorage.setItem("access", access);
+      localStorage.setItem("refresh", refresh);
+
+      login(response.data);
 
       toast.success("Login Successful");
+
+      // Navigation
+      if (user?.is_staff) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       const formattedErrors = {};
       const backendErrors = error.response?.data;
 
       if (backendErrors) {
-        // 🔹 Handle non-field errors (invalid credentials)
         if (backendErrors.non_field_errors) {
           formattedErrors.general = backendErrors.non_field_errors[0];
         }
 
-        // 🔹 Handle field errors
         Object.keys(backendErrors).forEach((key) => {
           if (key !== "non_field_errors") {
             formattedErrors[key] = Array.isArray(backendErrors[key])
@@ -57,8 +67,8 @@ localStorage.setItem("refresh", response.data.refresh);
       }
 
       setErrors(formattedErrors);
-      
-      toast.error("Login Failed");
+
+      toast.error(backendErrors?.non_field_errors?.[0] || "Login Failed");
     } finally {
       setLoading(false);
     }
@@ -69,13 +79,11 @@ localStorage.setItem("refresh", response.data.refresh);
       const res = await api.post(ENDPOINTS.GOOGLE_LOGIN, {
         id_token: credentialResponse.credential,
       });
-localStorage.setItem("access", res.data.access);
-localStorage.setItem("refresh", res.data.refresh);
+      localStorage.setItem("access", res.data.access);
+      localStorage.setItem("refresh", res.data.refresh);
       login(res.data);
-      
-      res.data.user?.is_staff
-        ? navigate("/admin")
-        : navigate("/");
+
+      res.data.user?.is_staff ? navigate("/admin") : navigate("/");
 
       toast.success("Google Login Successful");
     } catch (err) {

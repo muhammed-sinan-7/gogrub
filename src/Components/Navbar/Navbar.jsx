@@ -13,7 +13,6 @@ import {
   Loader2,
   Bell,
   BellDot,
-  on,
 } from "lucide-react";
 import { useUser } from "../../Context/UserContext";
 import api from "../../api/axios";
@@ -137,7 +136,7 @@ function Navbar() {
                 onClick={() => navigate("/notifications")}
                 className={`flex flex-col items-center gap-1 relative ${isActive("/cart")}`}
               >
-                <on size={22} />
+                <Bell size={22} />
                 {/* {cart.length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-slate-900 text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center font-bold ring-2 ring-white">
                     {cart.length}
@@ -273,7 +272,7 @@ function Navbar() {
           onClick={() => navigate("/notifications")}
           className={`flex flex-col items-center gap-1 relative ${isActive("/cart")}`}
         >
-          <on size={22} />
+          <Bell size={22} />
           {cart.length > 0 && (
             <span className="absolute -top-1 -right-1 bg-slate-900 text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center font-bold ring-2 ring-white">
               {cart.length}
