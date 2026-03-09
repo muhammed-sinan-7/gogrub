@@ -20,6 +20,17 @@ function Login() {
     setErrors({});
     setLoading(true);
 
+    const validationErrors = {};
+
+    if (!email) validationErrors.email = "Email is required";
+    if (!password) validationErrors.password = "Password is required";
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await api.post(ENDPOINTS.LOGIN, {
         email,
@@ -28,13 +39,12 @@ function Login() {
 
       const { access, refresh, user } = response.data;
 
-      // Blocked user check
-      if (!user?.is_active) {
+      if (user?.is_active === false) {
         toast.error("User blocked. Contact admin.");
+        setLoading(false);
         return;
       }
 
-      // Save tokens
       localStorage.setItem("access", access);
       localStorage.setItem("refresh", refresh);
 
@@ -42,31 +52,13 @@ function Login() {
 
       toast.success("Login Successful");
 
-      // Navigation
-      if (user?.is_staff) {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
+      navigate(user?.is_staff ? "/admin" : "/");
     } catch (error) {
-      const formattedErrors = {};
       const backendErrors = error.response?.data;
 
-      if (backendErrors) {
-        if (backendErrors.non_field_errors) {
-          formattedErrors.general = backendErrors.non_field_errors[0];
-        }
-
-        Object.keys(backendErrors).forEach((key) => {
-          if (key !== "non_field_errors") {
-            formattedErrors[key] = Array.isArray(backendErrors[key])
-              ? backendErrors[key][0]
-              : backendErrors[key];
-          }
-        });
-      }
-
-      setErrors(formattedErrors);
+      setErrors({
+        general: backendErrors?.non_field_errors?.[0],
+      });
 
       toast.error(backendErrors?.non_field_errors?.[0] || "Login Failed");
     } finally {
